@@ -21,7 +21,7 @@ console.log("###################################################################
 imap.once('ready', function() {
   openInbox(function(err, box) {
     if (err) throw err;
-    var f = imap.seq.fetch(box.messages.total + ':*', { bodies: ['HEADER.FIELDS (FROM TO SUBJECT)','TEXT'] });
+    var f = imap.seq.fetch('1:' + box.messages.total, { bodies: ['HEADER.FIELDS (FROM TO SUBJECT)','TEXT'] });
 
     f.on('message', function(msg, seqno) {
       var buffer = '';
