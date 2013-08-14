@@ -5,7 +5,7 @@
 var restify       = require('restify'),
     mongoose      = require('mongoose'),
     configuration = require('./config/configuration.js'),
-    lib           = require("./lib/provider-google-contact"),
+    lib           = require("./lib/provider-gmail"),
     handlers      = lib.handlers,
     middleware    = lib.middleware,
     server        = restify.createServer();

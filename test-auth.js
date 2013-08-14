@@ -12,8 +12,8 @@ var rl = readline.createInterface({
 });
 
 // Display access and refresh tokens.
-var withLoggedClient = function(oauth2Client, tokens) {
-  console.log("Paste this tokens in your keys.js file: ", tokens);
+var withLoggedClient = function(oauth2Client) {
+  console.log("Paste this tokens in your keys.js file: ", oauth2Client.credentials);
 
   process.exit();
 }
@@ -23,7 +23,7 @@ var getAccessToken = function(oauth2Client, callback) {
   // generate consent page url
   var url = oauth2Client.generateAuthUrl({
     access_type: 'offline',
-    scope: 'https://www.google.com/m8/feeds'
+    scope: 'https://mail.google.com/'
   });
 
   console.log('Visit the url: ', url);
