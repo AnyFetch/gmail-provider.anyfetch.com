@@ -1,7 +1,8 @@
+'use strict';
+
 var Imap = require('imap');
 var async = require('async');
-var inspect = require('util').inspect;
-var MailParser = require("mailparser").MailParser;
+var MailParser = require('mailparser').MailParser;
 var keys = require('./keys.js');
 var xoauth2 = require('xoauth2');
 var token;
@@ -9,7 +10,7 @@ var token;
 // Generate a XOAUTH2.0 token
 // See https://developers.google.com/gmail/xoauth2_protocol
 // And https://github.com/andris9/xoauth2
-xoauth2gen = xoauth2.createXOAuth2Generator({
+var xoauth2gen = xoauth2.createXOAuth2Generator({
   user: keys.IMAP_USER,
   clientId: keys.GOOGLE_ID,
   clientSecret: keys.GOOGLE_SECRET,
@@ -22,11 +23,11 @@ async.series([
     // Create a token from refresh_token
     xoauth2gen.getToken(function(err, t){
       if(err) {
-          return console.log(err);
+        return console.log(err);
       }
       token = t;
-      cb()
-    })
+      cb();
+    });
   },
   // Retrieve 10 first messages from the account
   function(cb) {
@@ -49,7 +50,7 @@ async.series([
         // 1:10 is the span of items to retrieve (first ten items here)
         var f = imap.seq.fetch('1:10', { bodies: ['HEADER.FIELDS (FROM TO CC SUBJECT DATE)','TEXT'] });
 
-        f.on('message', function(msg, seqno) {
+        f.on('message', function(msg) {
           // Build a buffed containing all datas from the mail
           var buffer = '';
 
@@ -68,7 +69,7 @@ async.series([
 
           msg.on('end', function() {
             // Create a new parser
-            parser = new MailParser();
+            var parser = new MailParser();
             // Normally asynchronous, but we'll feed every data at once so this will be called just after the call to parsen.end().
             parser.on("end", function(mail_object) {
               console.log("From:", mail_object.from);
@@ -78,7 +79,7 @@ async.series([
 
             parser.write(buffer);
             parser.end();
-          })
+          });
         });
 
         f.once('error', function(err) {
@@ -96,6 +97,9 @@ async.series([
     });
 
     imap.once('end', function(err) {
+      if(err) {
+        throw err;
+      }
       cb();
     });
 
