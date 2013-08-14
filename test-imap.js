@@ -4,6 +4,7 @@ var Imap = require('imap');
 var async = require('async');
 var MailParser = require('mailparser').MailParser;
 var keys = require('./keys.js');
+var decHex = require('./lib/provider-gmail/helpers/dec-hex.js');
 var xoauth2 = require('xoauth2');
 var token;
 
@@ -50,11 +51,14 @@ async.series([
         console.log(box.messages.total, 'mails in your Gmail.');
 
         // 1:10 is the span of items to retrieve (first ten items here)
-        var f = imap.seq.fetch('1:1', { bodies: ['HEADER.FIELDS (FROM TO CC SUBJECT DATE)','TEXT'] });
+        var f = imap.seq.fetch('1:15', { bodies: ['HEADER.FIELDS (FROM TO CC SUBJECT DATE)', 'TEXT'] });
 
         f.on('message', function(msg) {
-          // Build a buffer containing all datas from the mail
+
+           // Build a buffer containing all datas from the mail
           var buffer = '';
+          var id = null;
+          var threadId = null;
 
           msg.on('body', function(stream, info) {
             // Add data to buffer.
@@ -69,12 +73,21 @@ async.series([
             });
           });
 
+          msg.once('attributes', function(attrs) {
+            id = attrs ['x-gm-msgid'];
+            threadId = attrs ['x-gm-thrid'];
+          });
+
           msg.on('end', function() {
             // Create a new parser
             var parser = new MailParser();
             // Normally asynchronous, but we'll feed every data at once so this will be called just after the call to parsen.end().
             parser.on("end", function(mail_object) {
+              console.log('----------');
+              console.log("Id:", id);
+              console.log("tId:", decHex(threadId));
               console.log("From:", mail_object.from);
+              console.log("To:", mail_object.to);
               console.log("Subject:", mail_object.subject);
               //console.log("Text body:", mail_object.text);
             });
