@@ -6,6 +6,9 @@ var keys = require('./keys.js');
 var xoauth2 = require('xoauth2');
 var token;
 
+// Generate a XOAUTH2.0 token
+// See https://developers.google.com/gmail/xoauth2_protocol
+// And https://github.com/andris9/xoauth2
 xoauth2gen = xoauth2.createXOAuth2Generator({
   user: keys.IMAP_USER,
   clientId: keys.GOOGLE_ID,
@@ -14,10 +17,11 @@ xoauth2gen = xoauth2.createXOAuth2Generator({
 });
 
 async.series([
-  // Generate a XOAUTH token
+
   function(cb) {
+    // Create a token from refresh_token
     xoauth2gen.getToken(function(err, t){
-      if(err){
+      if(err) {
           return console.log(err);
       }
       token = t;
@@ -26,6 +30,8 @@ async.series([
   },
   // Retrieve 10 first messages from the account
   function(cb) {
+    // Create a new Imap connection
+    // See https://github.com/mscdex/node-imap
     var imap = new Imap({
       xoauth2:token,
       host: 'imap.gmail.com',
@@ -36,13 +42,21 @@ async.series([
 
     imap.once('ready', function() {
       imap.openBox('[Gmail]/All Mail', true, function(err, box) {
-        if (err) throw err;
+        if (err) {
+          throw err;
+        }
+
+        // 1:10 is the span of items to retrieve (first ten items here)
         var f = imap.seq.fetch('1:10', { bodies: ['HEADER.FIELDS (FROM TO CC SUBJECT DATE)','TEXT'] });
 
         f.on('message', function(msg, seqno) {
+          // Build a buffed containing all datas from the mail
           var buffer = '';
 
           msg.on('body', function(stream, info) {
+            // Add data to buffer.
+            // Headers are added to the top of the buffer,
+            // Body after.
             stream.on('data', function(chunk) {
               if(info.which === 'TEXT') {
                 buffer += chunk.toString();
@@ -53,7 +67,9 @@ async.series([
           });
 
           msg.on('end', function() {
+            // Create a new parser
             parser = new MailParser();
+            // Normally asynchronous, but we'll feed every data at once so this will be called just after the call to parsen.end().
             parser.on("end", function(mail_object) {
               console.log("From:", mail_object.from);
               console.log("Subject:", mail_object.subject);
