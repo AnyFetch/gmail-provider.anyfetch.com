@@ -1,6 +1,6 @@
-var app = require('./app.js');
+'use strict';
+
 var readline = require('readline');
-var request = require('request');
 var googleapis = require('googleapis');
 var keys = require('./keys');
 var OAuth2Client = googleapis.OAuth2Client;
@@ -16,7 +16,7 @@ var withLoggedClient = function(oauth2Client) {
   console.log("Paste this tokens in your keys.js file: ", oauth2Client.credentials);
 
   process.exit();
-}
+};
 
 // Retrieve a set of tokens from Google
 var getAccessToken = function(oauth2Client, callback) {
@@ -31,15 +31,22 @@ var getAccessToken = function(oauth2Client, callback) {
 
     // request access token
     oauth2Client.getToken(code, function(err, tokens) {
+      if(err) {
+        throw err;
+      }
       // set tokens to the client
       oauth2Client.credentials = tokens;
 
       callback(oauth2Client);
     });
   });
-}
+};
 
-googleapis.execute(function(err, client) {
+googleapis.execute(function(err) {
+  if(err) {
+    throw err;
+  }
+  
   var oauth2Client =
     new OAuth2Client(keys.GOOGLE_ID, keys.GOOGLE_SECRET, keys.GOOGLE_URL);
 

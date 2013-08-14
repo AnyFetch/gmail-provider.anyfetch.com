@@ -47,11 +47,13 @@ async.series([
           throw err;
         }
 
+        console.log(box.messages.total, 'mails in your Gmail.');
+
         // 1:10 is the span of items to retrieve (first ten items here)
-        var f = imap.seq.fetch('1:10', { bodies: ['HEADER.FIELDS (FROM TO CC SUBJECT DATE)','TEXT'] });
+        var f = imap.seq.fetch('1:1', { bodies: ['HEADER.FIELDS (FROM TO CC SUBJECT DATE)','TEXT'] });
 
         f.on('message', function(msg) {
-          // Build a buffed containing all datas from the mail
+          // Build a buffer containing all datas from the mail
           var buffer = '';
 
           msg.on('body', function(stream, info) {
