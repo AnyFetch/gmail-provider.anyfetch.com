@@ -13,7 +13,7 @@ var imap = new Imap({
 });
 
 function openInbox(cb) {
-  imap.openBox('INBOX', true, cb);
+  imap.openBox('[Gmail]/All Mail', true, cb);
 }
 
 console.log("###############################################################################################################################################");
@@ -21,7 +21,7 @@ console.log("###################################################################
 imap.once('ready', function() {
   openInbox(function(err, box) {
     if (err) throw err;
-    var f = imap.seq.fetch('1:' + box.messages.total, { bodies: ['HEADER.FIELDS (FROM TO SUBJECT)','TEXT'] });
+    var f = imap.seq.fetch('1:' + box.messages.total, { bodies: ['HEADER.FIELDS (FROM TO CC SUBJECT DATE)','TEXT'] });
 
     f.on('message', function(msg, seqno) {
       var buffer = '';
@@ -39,9 +39,9 @@ imap.once('ready', function() {
       msg.on('end', function() {
         parser = new MailParser();
         parser.on("end", function(mail_object) {
-          console.log("From:", mail_object.from); //[{address:'sender@example.com',name:'Sender Name'}]
-          console.log("Subject:", mail_object.subject); // Hello world!
-          //console.log("Text body:", mail_object.text); // How are you today?
+          console.log("From:", mail_object.from);
+          console.log("Subject:", mail_object.subject);
+          //console.log("Text body:", mail_object.text);
         });
 
         parser.write(buffer);
@@ -55,17 +55,12 @@ imap.once('ready', function() {
     f.once('end', function() {
       console.log('Done fetching all messages!');
       imap.end();
-
     });
   });
 });
 
 imap.once('error', function(err) {
   console.log(err);
-});
-
-imap.once('end', function() {
-  process.exit();
 });
 
 imap.connect();
