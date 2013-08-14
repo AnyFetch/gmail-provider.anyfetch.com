@@ -1,0 +1,54 @@
+{
+  "name": "cluestr-provider-gmail",
+  "version": "0.1.0",
+  "author": "Matthieu Bacconnier <matthieu.bacconnier@papiel.fr>",
+  "contributors": [
+    {
+      "name": "Robin Ricard",
+      "email": "ricard.robin@gmail.com"
+    },
+    {
+      "name": "Pierre-Marie Dartus",
+      "email": "dartus.pierremarie@gmail.com"
+    }
+  ],
+  "bin": {
+    "server": "./bin/server"
+  },
+  "scripts": {
+    "start": "node ./bin/server",
+    "test": "NODE_ENV=test mocha -R spec -t 2500",
+    "lint": "jshint lib/ test/ config/ bin/"
+  },
+  "main": "./lib/provider-gmail",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Papiel/provider-gmail"
+  },
+  "keywords": [
+    "cluestr",
+    "provider",
+    "gmail"
+  ],
+  "dependencies": {
+    "async": "0.2.x",
+    "restify": "2.6.x",
+    "mongoose": "3.6.x",
+    "mongoose-validator": "0.2.x",
+    "googleapis": "0.4.x",
+    "request": "2.26.x"
+  },
+  "devDependencies": {
+    "mocha": "1.11.x",
+    "should": "1.2.x",
+    "supertest": "0.7.x",
+    "mocha-mongoose": "0.1.x",
+    "factory-lady": "0.1.x",
+    "zombie": "2.0.x",
+    "jshint": "2.1.x"
+  },
+  "licence": "Copyright Papiel",
+  "engines": {
+    "node": ">=0.10"
+  }
+}
