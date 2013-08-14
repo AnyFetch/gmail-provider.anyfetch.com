@@ -1,10 +1,10 @@
 'use strict';
 
-var should = require('should');
+require('should');
 var async = require('async');
 
 var keys = require('../keys.js');
-var providerGoogleContact = require('../lib/provider-google-contact');
+var providerGoogleContact = require('../lib/provider-gmail');
 var Token = providerGoogleContact.models.Token;
 
 describe("Upload code", function () {
