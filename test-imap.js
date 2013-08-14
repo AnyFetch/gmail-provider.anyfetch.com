@@ -57,8 +57,7 @@ async.series([
 
            // Build a buffer containing all datas from the mail
           var buffer = '';
-          var id = null;
-          var threadId = null;
+          var attrs = null;
 
           msg.on('body', function(stream, info) {
             // Add data to buffer.
@@ -73,9 +72,8 @@ async.series([
             });
           });
 
-          msg.once('attributes', function(attrs) {
-            id = attrs ['x-gm-msgid'];
-            threadId = attrs ['x-gm-thrid'];
+          msg.once('attributes', function(a) {
+            attrs = a;
           });
 
           msg.on('end', function() {
@@ -84,11 +82,12 @@ async.series([
             // Normally asynchronous, but we'll feed every data at once so this will be called just after the call to parsen.end().
             parser.on("end", function(mail_object) {
               console.log('----------');
-              console.log("Id:", id);
-              console.log("tId:", gmailUrl(keys.IMAP_USER, threadId));
+              console.log("Id:", attrs['x-gm-msgid']);
+              console.log("tId:", gmailUrl(keys.IMAP_USER, attrs['x-gm-thrid']));
               console.log("From:", mail_object.from);
               console.log("To:", mail_object.to);
               console.log("Subject:", mail_object.subject);
+              console.log("Labels:", attrs['x-gm-labels']);
               //console.log("Text body:", mail_object.text);
             });
 
