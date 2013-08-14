@@ -1,7 +1,7 @@
-# Google Contact Cluestr Provider
+# GMail Cluestr Provider
 > Visit http://cluestr.com for details about Cluestr.
 
-Cluestr provider for contacts stored in Google Contacts.
+Cluestr provider for mails stored in Gmail
 
 # How to install?
 Vagrant up everything (`vagrant up`, `vagrant ssh`).
@@ -19,7 +19,7 @@ module.exports.CLUESTR_ID = "{your_cluestr_id}";
 module.exports.CLUESTR_SECRET = "{your_cluestr_secret}";
 module.exports.CLUESTR_URL = "{cluestr_provider_url}"
 
-// Access token for test.
+// Google tokens for test.
 // See README.md
 module.exports.GOOGLE_TOKENS = '{see below}';
 ```
@@ -31,7 +31,7 @@ Google will then call us back on `/init/callback` with a `code` parameter. We'll
 We can now sync datas between Google and Cluestr.
 
 This is where the `upload` handler comes into play.
-The function will retrieve, for all the accounts, the contacts modified since the last run, and upload the datas to Cluestr.
+The function will retrieve, for all the accounts, the mail created since the last run, and upload the datas to Cluestr.
 
 # How to test?
 Unfortunately, testing this module is really hard.
