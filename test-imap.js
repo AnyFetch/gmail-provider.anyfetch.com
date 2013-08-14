@@ -4,7 +4,7 @@ var Imap = require('imap');
 var async = require('async');
 var MailParser = require('mailparser').MailParser;
 var keys = require('./keys.js');
-var decHex = require('./lib/provider-gmail/helpers/dec-hex.js');
+var gmailUrl = require('./lib/provider-gmail/helpers/gmail-url.js');
 var xoauth2 = require('xoauth2');
 var token;
 
@@ -85,7 +85,7 @@ async.series([
             parser.on("end", function(mail_object) {
               console.log('----------');
               console.log("Id:", id);
-              console.log("tId:", decHex(threadId));
+              console.log("tId:", gmailUrl(keys.IMAP_USER, threadId));
               console.log("From:", mail_object.from);
               console.log("To:", mail_object.to);
               console.log("Subject:", mail_object.subject);
