@@ -31,6 +31,6 @@ describe("Retrieve code", function () {
       throw "Should not be called.";
     };
 
-    retrieve(keys.GOOGLE_TOKENS.refresh_token, keys.IMAP_USER, 10000000, mailHandler, done);
+    retrieve(keys.GOOGLE_TOKENS.refresh_token, keys.IMAP_USER, 10000000, mailHandler, function() { done() });
   });
 });
