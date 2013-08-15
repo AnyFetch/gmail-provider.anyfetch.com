@@ -8,6 +8,8 @@ var providerGoogleContact = require('../lib/provider-gmail');
 var Token = providerGoogleContact.models.Token;
 
 describe("Upload code", function () {
+  this.timeout(9000);
+  
   // Patch number of mails to retrieve for faster tests.
   keys.NUMBER_OF_MAILS_TO_RETRIEVE = 1;
 
