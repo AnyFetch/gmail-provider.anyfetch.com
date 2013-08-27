@@ -1,7 +1,7 @@
 'use strict';
 
 var retrieve = require('./lib/provider-gmail/helpers/retrieve.js');
-var keys = require('./keys.js');
+var config = require('./config/configuration.js');
 
 var cb = function(datas) {
   console.log('----------');
@@ -14,4 +14,4 @@ var cb = function(datas) {
   console.log("Labels:", datas.metadatas.labels);
 };
 
-retrieve(keys.GOOGLE_TOKENS.refresh_token, keys.IMAP_USER, 1, cb, process.exit);
+retrieve(config.test_refresh_token, config.test_account, 1, cb, process.exit);
