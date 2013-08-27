@@ -1,7 +1,11 @@
-// # config/configuration
-// Defines application's settings
+/**
+ * @file Defines the provider settings.
+ *
+ * Will set the path to Mongo, and applications id
+ * Most of the configuration can be done using system environment variables.
+ */
 
-// Process some values
+// node_env can either be "development" or "production"
 var node_env = process.env.NODE_ENV || "development";
 var default_port = 8000;
 if(node_env === "production") {

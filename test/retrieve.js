@@ -2,14 +2,14 @@
 
 require('should');
 var retrieve = require('../lib/provider-gmail/helpers/retrieve.js');
-var keys = require('../keys.js');
+var config = require('../config/configuration.js');
 
 describe("Retrieve code", function () {
   // increase timeout, Gmail can be quite slow sometimes
   // and no one likes failing test cases due to timeout.
   this.timeout(9000);
   // Patch number of mails to retrieve for faster tests.
-  keys.NUMBER_OF_MAILS_TO_RETRIEVE = 1;
+  config.number_of_mails_to_retrieve = 1;
 
   it("should list mails", function (done) {
     var mailHandler = function(datas) {
@@ -23,7 +23,7 @@ describe("Retrieve code", function () {
       done();
     };
 
-    retrieve(keys.GOOGLE_TOKENS.refresh_token, keys.IMAP_USER, 1, mailHandler, function() {});
+    retrieve(config.test_refresh_token, config.test_account, 1, mailHandler, function() {});
   });
 
   it("should list mails with respect to `from` parameter", function (done) {
@@ -31,6 +31,6 @@ describe("Retrieve code", function () {
       throw "Should not be called.";
     };
 
-    retrieve(keys.GOOGLE_TOKENS.refresh_token, keys.IMAP_USER, 10000000, mailHandler, function() { done() });
+    retrieve(config.test_refresh_token, config.test_account, 10000000, mailHandler, function() { done(); });
   });
 });
