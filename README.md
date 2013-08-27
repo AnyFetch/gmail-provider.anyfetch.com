@@ -8,20 +8,27 @@ Vagrant up everything (`vagrant up`, `vagrant ssh`).
 
 Create a `keys.js` file on the directory root:
 
-```javascript
-// Google ids
-module.exports.GOOGLE_ID = "{your_google_id}";
-module.exports.GOOGLE_SECRET = "{yourgoogle_secret}";
-module.exports.GOOGLE_URL = "{your_redirect_url}";
+You'll need to define some environment variables
 
-// Cluestr ids
-module.exports.CLUESTR_ID = "{your_cluestr_id}";
-module.exports.CLUESTR_SECRET = "{your_cluestr_secret}";
-module.exports.CLUESTR_URL = "{cluestr_provider_url}"
+```shell
+# Go to https://code.google.com/apis/console/b/0/?pli=1#access to ask from app id and secret
+export GMAIL_ID="gmail-app-id"
+export GMAIL_SECRET="gmail-app-secret"
 
-// Google tokens for test.
-// See README.md
-module.exports.GOOGLE_TOKENS = '{see below}';
+# Callback after google consent, most probably http://your-host/init/callback
+export GMAIL_CALLBACK_URL="url-for-callback"
+
+# Cluestr app id and secret
+export GMAIL_CLUESTR_ID="cluestr-app-id"
+export GMAIL_CLUESTR_SECRET="cluestr-app-secret"
+
+# Number of mails to retrieve in one run.
+# Will be patched when running tests
+export.NUMBER_OF_MAILS_TO_RETRIEVE='*';
+
+# See below for details
+export GMAIL_TEST_REFRESH_TOKEN="see-below"
+export GMAIL_TEST_ACCOUNT_NAME="see-below"
 ```
 
 # How does it works?
@@ -43,8 +50,9 @@ Before running the test suite, you'll need to do:
 > node test-auth.js
 ```
 
-Follow the link in your browser with your Google Account. You'll be redirected to `localhost` (server is not running, so you'll get an error). Copy-paste the `code` parameter in your shell, then paste the returned object in your `keys.js` file.
+Follow the link in your browser with your Google Account. You'll be redirected to `localhost` (server is not running, so you'll get an error). Copy-paste the `code` parameter in your shell, then use the returned value as your GMAIL_TEST_REFRESH_TOKEN environment variable.
 
 > Warning: a refresh token is only displayed once. If you get it wrong for some reason, you'll need to clear the permission for your app on https://www.google.com/settings/u/1/security
 
 Support: `support@papiel.fr`.
+
