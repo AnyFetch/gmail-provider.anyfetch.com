@@ -24,7 +24,7 @@ export GMAIL_CLUESTR_SECRET="cluestr-app-secret"
 
 # Number of mails to retrieve in one run.
 # Will be patched when running tests
-export.NUMBER_OF_MAILS_TO_RETRIEVE='*';
+export NUMBER_OF_MAILS_TO_RETRIEVE='*';
 
 # See below for details
 export GMAIL_TEST_REFRESH_TOKEN="see-below"
@@ -50,7 +50,7 @@ Before running the test suite, you'll need to do:
 > node test-auth.js
 ```
 
-Follow the link in your browser with your Google Account. You'll be redirected to `localhost` (server is not running, so you'll get an error). Copy-paste the `code` parameter in your shell, then use the returned value as your GMAIL_TEST_REFRESH_TOKEN environment variable.
+Follow the link in your browser with your Google Account. You'll be redirected to `localhost` (server is not running, so you'll get an error). Copy-paste the `code` parameter in your shell, then use the returned value as your `GMAIL_TEST_REFRESH_TOKEN` environment variable.
 
 > Warning: a refresh token is only displayed once. If you get it wrong for some reason, you'll need to clear the permission for your app on https://www.google.com/settings/u/1/security
 
