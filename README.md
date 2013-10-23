@@ -6,11 +6,11 @@ Cluestr provider for mails stored in Gmail
 # How to install?
 Vagrant up everything (`vagrant up`, `vagrant ssh`).
 
-Create a `keys.js` file on the directory root:
+Create a `keys.sh` file on the directory root:
 
 You'll need to define some environment variables
 
-```shell
+```sh
 # Go to https://code.google.com/apis/console/b/0/?pli=1#access to ask from app id and secret
 export GMAIL_ID="gmail-app-id"
 export GMAIL_SECRET="gmail-app-secret"
