@@ -14,7 +14,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.run_list = [
-      "recipe[libssl::devel]",
       "recipe[git]",
       "recipe[nodejs]",
       "recipe[mongodb]"
