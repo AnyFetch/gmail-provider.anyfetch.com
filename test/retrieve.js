@@ -1,36 +1,53 @@
 'use strict';
 
-require('should');
-var retrieve = require('../lib/provider-gmail/helpers/retrieve.js');
+var should = require('should');
 var config = require('../config/configuration.js');
+var retrieve = require('../lib/provider-gmail/helpers/retrieve.js');
 
 describe("Retrieve code", function () {
-  // increase timeout, Gmail can be quite slow sometimes
-  // and no one likes failing test cases due to timeout.
-  this.timeout(9000);
-  // Patch number of mails to retrieve for faster tests.
-  config.number_of_mails_to_retrieve = 1;
-
-  it("should list mails", function (done) {
-    var mailHandler = function(datas) {
-      datas.should.have.property('identifier');
-      datas.should.have.property('actions');
-      datas.actions.should.have.property('show');
-      datas.should.have.property('metadatas');
-      datas.metadatas.should.have.property('id');
-      datas.metadatas.should.have.property('subject');
+  it("should get all mails", function (done) {
+    this.timeout(5000);
+    var mails = [];
+    retrieve(config.test_refresh_token, config.test_account,new Date(1970), function(mail) {
+      mails.push(mail);
+    },function (err) {
+      if(err) {
+        throw err;
+      }
+      should.exist(mails[0]);
 
       done();
-    };
-
-    retrieve(config.test_refresh_token, config.test_account, 1, mailHandler, function() {});
+    });
   });
 
-  it("should list mails with respect to `from` parameter", function (done) {
-    var mailHandler = function() {
-      throw "Should not be called.";
-    };
 
-    retrieve(config.test_refresh_token, config.test_account, 10000000, mailHandler, function() { done(); });
+  it("should list mail modified in future date", function (done) {
+    this.timeout(5000);
+    var mails = [];
+    retrieve(config.test_refresh_token, config.test_account, new Date(2020, 9, 22), function(mail) {
+      mails.push(mail);
+      },
+      function (err) {
+        if(err) {
+          throw err;
+        }
+        mails.should.have.lengthOf(0);
+        done();
+    });
+  });
+
+  it("should list mail modified after specified date", function (done) {
+    this.timeout(5000);
+    var mails = [];
+    retrieve(config.test_refresh_token, config.test_account, new Date(2013, 9, 22), function(mail) {
+      mails.push(mail);
+      },
+      function (err) {
+        if(err) {
+          throw err;
+        }
+        mails.should.have.lengthOf(6);
+        done();
+    });
   });
 });
