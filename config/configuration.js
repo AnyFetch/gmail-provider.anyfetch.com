@@ -34,7 +34,7 @@ if (!process.env.GMAIL_TEST_ACCOUNT_NAME) {
   console.log("GMAIL_TEST_ACCOUNT_NAME not specified, api will not work.");
 }
 if (!process.env.GOOGLE_CONNECT_URL) {
-  console.log("GOOGLE__CONNECT_URL not specified, api will not work.");
+  console.log("GOOGLE_CONNECT_URL not specified, api will not work.");
 }
 if (!process.env.GMAIL_CALLBACK_URL) {
   console.log("GMAIL_CALLBACK_URL not specified, api will not work.");
