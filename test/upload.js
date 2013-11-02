@@ -1,36 +1,58 @@
 'use strict';
 
+var request = require('supertest');
+var CluestrProvider = require('cluestr-provider');
 require('should');
-var async = require('async');
 
 var config = require('../config/configuration.js');
-var providerGoogleContact = require('../lib/provider-gmail');
-var Token = providerGoogleContact.models.Token;
+var serverConfig = require('../lib/provider-gmail');
 
-describe("Upload code", function () {
-  this.timeout(9000);
-  
-  // Patch number of mails to retrieve for faster tests.
-  config.number_of_mails_to_retrieve = 1;
 
-  it("should not raise any exception", function (done) {
-    var token = new Token({
-      googleToken: config.test_refresh_token,
-      googleAccount: config.test_account
-    });
 
-    async.series([
-      function(cb) {
-        token.save(function(err) {
-          if(err) {
-            throw err;
-          }
-          cb();
-        });
-      },
-      function(cb) {
-        providerGoogleContact.helpers.upload(cb);
-      }
-    ], done);
+describe("Workflow", function () {
+  before(CluestrProvider.debug.cleanTokens);
+
+  // Create a fake HTTP server
+  process.env.CLUESTR_SERVER = 'http://localhost:1337';
+
+  // Create a fake HTTP server
+  var frontServer = CluestrProvider.debug.createTestApiServer();
+  frontServer.listen(1337);
+
+  before(function(done) {
+    CluestrProvider.debug.createToken({
+      cluestrToken: 'fake_gc_access_token',
+      datas: config.test_refresh_token,
+      cursor: new Date(1970)
+    }, done);
+  });
+
+  it("should upload datas to Cluestr", function (done) {
+    this.timeout(5000);
+    var originalQueueWorker = serverConfig.queueWorker;
+    serverConfig.queueWorker = function(task, cluestrClient, refreshToken, cb) {
+      task.should.have.property('identifier');
+      task.should.have.property('actions');
+      task.should.have.property('metadatas');
+
+      originalQueueWorker(task, cluestrClient, cb);
+    };
+    var server = CluestrProvider.createServer(serverConfig);
+
+    server.queue.drain = function() {
+      done();
+    };
+
+    request(server)
+      .post('/update')
+      .send({
+        access_token: 'fake_gc_access_token'
+      })
+      .expect(202)
+      .end(function(err) {
+        if(err) {
+          throw err;
+        }
+      });
   });
 });

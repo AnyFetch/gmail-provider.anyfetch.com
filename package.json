@@ -10,6 +10,10 @@
     {
       "name": "Pierre-Marie Dartus",
       "email": "dartus.pierremarie@gmail.com"
+    },
+    {
+      "name": "Julien Balian",
+      "email": "julien.balian@supinfo.com"
     }
   ],
   "bin": {
@@ -17,7 +21,7 @@
   },
   "scripts": {
     "start": "node ./bin/server",
-    "test": "NODE_ENV=test mocha -R spec -t 2500 -g skip",
+    "test": "NODE_ENV=test mocha -R spec -t 5000 ",
     "lint": "jshint lib/ test/ config/ bin/"
   },
   "main": "./lib/provider-gmail",
@@ -32,24 +36,17 @@
   ],
   "dependencies": {
     "async": "0.2.x",
-    "restify": "2.6.x",
-    "mongoose": "3.6.x",
-    "mongoose-validator": "0.2.x",
+    "sspawn": "0.1.1",
+    "cluestr-provider": "0.x.x",
     "googleapis": "0.4.x",
-    "request": "2.26.x",
     "imap": "0.8.x",
     "mailparser": "0.3.6",
-    "xoauth2": "0.1.x",
-    "cluestr": "0.1.x"
+    "xoauth2": "0.1.x"
   },
   "devDependencies": {
     "mocha": "1.11.x",
     "should": "1.2.x",
-    "supertest": "0.7.x",
-    "mocha-mongoose": "0.1.x",
-    "factory-lady": "0.1.x",
-    "zombie": "2.0.x",
-    "jshint": "2.1.x"
+    "supertest": "0.7.x"
   },
   "licence": "Copyright Papiel",
   "engines": {
