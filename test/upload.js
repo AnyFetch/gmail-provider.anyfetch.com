@@ -28,20 +28,22 @@ describe("Workflow", function () {
   });
 
   it("should upload datas to Cluestr", function (done) {
-    this.timeout(5000);
+    var nbMailsChecked = 0;
+
     var originalQueueWorker = serverConfig.queueWorker;
     serverConfig.queueWorker = function(task, cluestrClient, refreshToken, cb) {
       task.should.have.property('identifier');
       task.should.have.property('actions');
       task.should.have.property('metadatas');
 
+      nbMailsChecked += 1;
+      if(nbMailsChecked === 5) {
+        done();
+      }
       originalQueueWorker(task, cluestrClient, cb);
     };
+    
     var server = CluestrProvider.createServer(serverConfig);
-
-    server.queue.drain = function() {
-      done();
-    };
 
     request(server)
       .post('/update')
