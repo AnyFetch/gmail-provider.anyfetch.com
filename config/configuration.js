@@ -24,9 +24,6 @@ if (!process.env.GMAIL_CLUESTR_ID){
 if (!process.env.GMAIL_CLUESTR_SECRET){
   console.log("GMAIL_CLUESTR_SECRET not specified, api will not work.");
 }
-if (!process.env.NUMBER_OF_MAILS_TO_RETRIEVE){
-  console.log("NUMBER_OF_MAILS_TO_RETRIEVE not specified, api will not work.");
-}
 if (!process.env.GMAIL_TEST_REFRESH_TOKEN){
   console.log("GMAIL_TEST_REFRESH_TOKEN not specified, api will not work.");
 }
@@ -58,7 +55,6 @@ module.exports = {
   connect_url: process.env.GOOGLE_CONNECT_URL,
   cluestr_id: process.env.GMAIL_CLUESTR_ID,
   cluestr_secret: process.env.GMAIL_CLUESTR_SECRET,
-  number_of_mails_to_retrieve: process.env.NUMBER_OF_MAILS_TO_RETRIEVE,
 
   test_refresh_token: process.env.GMAIL_TEST_REFRESH_TOKEN,
   test_account: process.env.GMAIL_TEST_ACCOUNT_NAME

@@ -6,7 +6,6 @@ before_script: npm install --dev
 script: npm test
 env:
   global:
-  - NUMBER_OF_MAILS_TO_RETRIEVE='*'
   - GOOGLE_CONNECT_URL="http://localhost:8000/init/connect"
   - GMAIL_CALLBACK_URL="http://localhost:8000/init/callback"
   - secure: BagjdwqnJtKwauyvCOCO2G3U5gXzbzWyOY6yOHyhrDN8kMoviFZP07bjmFn0KyQg3sGs3aMfZ3ZPPmbLbLiV3Es7SIGlPISQ/jMs+eweP7h1R0YagFmDdacOyhV4SbZg0nM2mSaoyyXPP6KFDhY31YxtH4Rs0Ea5mTkgA4xXzzY=

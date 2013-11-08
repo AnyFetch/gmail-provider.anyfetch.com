@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "node ./bin/server",
-    "test": "NODE_ENV=test mocha -R spec -t 5000000 -g upload",
+    "test": "NODE_ENV=test mocha -R spec -t 5000",
     "lint": "jshint lib/ test/ config/ bin/"
   },
   "main": "./lib/provider-gmail",
@@ -44,9 +44,9 @@
     "xoauth2": "0.1.x"
   },
   "devDependencies": {
-    "mocha": "1.11.x",
-    "should": "1.2.x",
-    "supertest": "0.7.x"
+    "mocha": "1.14.x",
+    "should": "2.0.x",
+    "supertest": "0.8.x"
   },
   "licence": "Copyright Papiel",
   "engines": {
