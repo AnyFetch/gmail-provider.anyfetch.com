@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @file Defines the provider settings.
  *
@@ -12,31 +14,12 @@ if(node_env === "production") {
   default_port = 80;
 }
 
-if(!process.env.GMAIL_ID) {
-  console.log("GMAIL_ID not specified, api will not work.");
-}
-if (!process.env.GMAIL_SECRET){
-  console.log("GMAIL_SECRET not specified, api will not work.");
-}
-if (!process.env.GMAIL_CLUESTR_ID){
-  console.log("GMAIL_CLUESTR_ID not specified, api will not work.");
-}
-if (!process.env.GMAIL_CLUESTR_SECRET){
-  console.log("GMAIL_CLUESTR_SECRET not specified, api will not work.");
-}
-if (!process.env.GMAIL_TEST_REFRESH_TOKEN){
-  console.log("GMAIL_TEST_REFRESH_TOKEN not specified, api will not work.");
-}
-if (!process.env.GMAIL_TEST_ACCOUNT_NAME) {
-  console.log("GMAIL_TEST_ACCOUNT_NAME not specified, api will not work.");
-}
-if (!process.env.GOOGLE_CONNECT_URL) {
-  console.log("GOOGLE_CONNECT_URL not specified, api will not work.");
-}
-if (!process.env.GMAIL_CALLBACK_URL) {
-  console.log("GMAIL_CALLBACK_URL not specified, api will not work.");
-}
-
+var mandatories = ['GMAIL_ID', 'GMAIL_SECRET', 'GMAIL_CLUESTR_ID', 'GMAIL_CLUESTR_SECRET', 'GOOGLE_CONNECT_URL', 'GMAIL_CALLBACK_URL'];
+mandatories.forEach(function(mandatory) {
+  if(!process.env[mandatory]) {
+    console.log(mandatory + " missing, the provider may fail.");
+  }
+});
 
 // Exports configuration
 module.exports = {
