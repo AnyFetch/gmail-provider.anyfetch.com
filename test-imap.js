@@ -10,6 +10,7 @@ var cb = function(datas) {
   console.log("URL:", datas.actions.show);
   console.log("Id:", datas.metadatas.id);
   console.log("tId:", datas.metadatas.threadid);
+  console.log("Date:", datas.metadatas.date);
   console.log("From:", datas.metadatas.from);
   console.log("To:", datas.metadatas.to);
   console.log("Subject:", datas.metadatas.subject);
