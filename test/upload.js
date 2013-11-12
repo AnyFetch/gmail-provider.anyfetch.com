@@ -23,7 +23,7 @@ describe("Workflow", function () {
     CluestrProvider.debug.createToken({
       cluestrToken: 'fake_gc_access_token',
       datas: config.test_refresh_token,
-      cursor: new Date(1970)
+      cursor: 1
     }, done);
   });
 

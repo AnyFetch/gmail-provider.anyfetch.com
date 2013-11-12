@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "node ./bin/server",
-    "test": "NODE_ENV=test mocha -R spec -t 5000",
+    "test": "NODE_ENV=test mocha -R spec -t 50000",
     "lint": "jshint lib/ test/ config/ bin/"
   },
   "main": "./lib/provider-gmail",
