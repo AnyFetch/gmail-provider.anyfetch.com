@@ -9,17 +9,20 @@ describe("Retrieve code", function () {
     var mails = [];
     retrieve(config.test_refresh_token, config.test_account, 1, function(mail) {
       mails.push(mail);
-    },function (err) {
+    },function (err, lastUid) {
       if(err) {
         throw err;
       }
       should.exist(mails[0]);
 
+      lastUid.should.be.above(8);
+      
+      console.log("UID", lastUid);
       done();
     });
   });
 
-  it("should list mail modified after specified date", function (done) {
+  it("should list mails modified after specified uid", function (done) {
     var mails = [];
     retrieve(config.test_refresh_token, config.test_account, 4, function(mail) {
       mails.push(mail);
