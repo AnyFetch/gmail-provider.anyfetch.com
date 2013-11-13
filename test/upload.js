@@ -16,8 +16,8 @@ describe("Workflow", function () {
   process.env.CLUESTR_SERVER = 'http://localhost:1337';
 
   // Create a fake HTTP server
-  var frontServer = CluestrProvider.debug.createTestApiServer();
-  frontServer.listen(1337);
+  var apiServer = CluestrProvider.debug.createTestApiServer();
+  apiServer.listen(1337);
 
   before(function(done) {
     CluestrProvider.debug.createToken({
@@ -40,6 +40,7 @@ describe("Workflow", function () {
       if(nbMailsChecked === 5) {
         done();
       }
+      
       originalQueueWorker(task, cluestrClient, cb);
     };
     

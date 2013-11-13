@@ -7,8 +7,8 @@ var mails = 0;
 var cb = function(datas) {
   mails += 1;
   console.log('----------' + mails);
-  console.log("URL:", datas.actions.show);
-  console.log("uId:", datas.datas.uid);
+  // console.log("URL:", datas.actions.show);
+  // console.log("uId:", datas.datas.uid);
   // console.log("Id:", datas.datas.id);
   // console.log("tId:", datas.datas.threadid);
   // console.log("From:", datas.metadatas.from);
