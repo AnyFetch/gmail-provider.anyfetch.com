@@ -16,8 +16,7 @@ describe("Retrieve code", function () {
       should.exist(mails[0]);
 
       lastUid.should.be.above(8);
-      
-      console.log("UID", lastUid);
+
       done();
     });
   });
