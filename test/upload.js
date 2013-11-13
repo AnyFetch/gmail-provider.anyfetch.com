@@ -35,6 +35,10 @@ describe("Workflow", function () {
       task.should.have.property('identifier');
       task.should.have.property('actions');
       task.should.have.property('metadatas');
+      task.metadatas.should.have.property('from');
+      task.metadatas.should.have.property('subject');
+      task.metadatas.should.have.property('text');
+      task.should.have.property('datas');
 
       nbMailsChecked += 1;
       if(nbMailsChecked === 5) {
