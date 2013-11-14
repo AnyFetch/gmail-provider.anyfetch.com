@@ -43,7 +43,7 @@
     "imap": "0.8.x",
     "mailparser": "0.3.6",
     "xoauth2": "0.1.x",
-    "newrelic": "1.x.x",
+    "newrelic": "1.x.x"
   },
   "devDependencies": {
     "mocha": "1.14.x",
