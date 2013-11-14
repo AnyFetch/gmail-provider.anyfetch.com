@@ -8,7 +8,6 @@ keys.sh
 .vagrant/*
 Berksfile.lock
 
-
 # NPM Artifacts
 node_modules/*
 npm-debug.log

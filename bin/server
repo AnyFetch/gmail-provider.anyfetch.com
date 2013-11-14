@@ -1,10 +1,13 @@
 #!/bin/env node
-
 'use strict';
 /**
  * @file Launch the server
  *
  */
+ // New Relic RPM
+if(process.env.NEW_RELIC_LICENSE_KEY) {
+  require('newrelic');
+}
 
 // Load configuration
 var config = require("../config/configuration.js");
