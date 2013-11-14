@@ -36,6 +36,7 @@
   ],
   "dependencies": {
     "async": "0.2.x",
+    "request": "2.26.x",
     "sspawn": "0.1.1",
     "cluestr-provider": "0.x.x",
     "googleapis": "0.4.x",

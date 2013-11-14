@@ -27,7 +27,8 @@ var getAccessToken = function(oauth2Client, callback) {
   // generate consent page url
   var url = oauth2Client.generateAuthUrl({
     access_type: 'offline',
-    scope: 'https://mail.google.com/'
+    scope: 'https://mail.google.com/ https://www.googleapis.com/auth/userinfo.email',
+    approval_prompt: 'force',
   });
 
   console.log('Visit the url: ', url);
