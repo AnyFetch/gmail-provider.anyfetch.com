@@ -22,7 +22,10 @@ describe("Workflow", function () {
   before(function(done) {
     CluestrProvider.debug.createToken({
       cluestrToken: 'fake_gc_access_token',
-      datas: config.test_refresh_token,
+      datas: {
+        refreshToken: config.test_refresh_token,
+        mail : config.test_account
+      },
       cursor: 1
     }, done);
   });
