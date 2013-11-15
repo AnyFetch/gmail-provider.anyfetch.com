@@ -29,7 +29,7 @@ describe("Retrieve code", function () {
       if(err) {
         throw err;
       }
-      mails.should.have.lengthOf(6);
+      mails.length.should.have.above(6);
       done();
     });
   });

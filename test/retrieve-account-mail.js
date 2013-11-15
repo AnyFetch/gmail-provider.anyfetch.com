@@ -45,7 +45,7 @@ var refreshAccessToken = function(refreshToken, cb) {
 
 
 describe("Retrieve account mail", function () {
-  it("should get the user email azer", function (done) {
+  it("should get the user email", function (done) {
     async.waterfall([
       async.apply(refreshAccessToken, config.test_refresh_token),
       function(accessToken, cb) {
