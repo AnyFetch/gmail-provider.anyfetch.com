@@ -6,7 +6,7 @@ before_script: npm install --dev
 script: npm test
 env:
   global:
-  - GOOGLE_CONNECT_URL="http://localhost:8000/init/connect"
+  - GMAIL_CONNECT_URL="http://localhost:8000/init/connect"
   - GMAIL_CALLBACK_URL="http://localhost:8000/init/callback"
   - secure: BagjdwqnJtKwauyvCOCO2G3U5gXzbzWyOY6yOHyhrDN8kMoviFZP07bjmFn0KyQg3sGs3aMfZ3ZPPmbLbLiV3Es7SIGlPISQ/jMs+eweP7h1R0YagFmDdacOyhV4SbZg0nM2mSaoyyXPP6KFDhY31YxtH4Rs0Ea5mTkgA4xXzzY=
   - secure: Tsy5QXxUcbzG8i352ZtFh/KkkRmL7pB+PqsVrVtsEVkbRWSKZ03i2diV1O/sPgyu+3o0V+FGygLeUcjsxbvZ681vi/uD98nJmVRtIFt8Y54ToBQv+3pKg3MolKF+hTEpghetMbTIUwKXC8jBdloLk+9FKFDvb7y7fCXAakO4Wr4=

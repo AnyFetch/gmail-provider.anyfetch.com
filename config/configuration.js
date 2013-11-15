@@ -35,7 +35,7 @@ module.exports = {
   google_callback: process.env.GMAIL_CALLBACK_URL,
 
 
-  connect_url: process.env.GOOGLE_CONNECT_URL,
+  connect_url: process.env.GMAIL_CONNECT_URL,
   cluestr_id: process.env.GMAIL_CLUESTR_ID,
   cluestr_secret: process.env.GMAIL_CLUESTR_SECRET,
 
