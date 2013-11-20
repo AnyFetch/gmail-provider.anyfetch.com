@@ -14,7 +14,7 @@ if(node_env === "production") {
   default_port = 80;
 }
 
-var mandatories = ['GMAIL_ID', 'GMAIL_SECRET', 'GMAIL_CLUESTR_ID', 'GMAIL_CLUESTR_SECRET', 'GOOGLE_CONNECT_URL', 'GMAIL_CALLBACK_URL'];
+var mandatories = ['GMAIL_ID', 'GMAIL_SECRET', 'GMAIL_CLUESTR_ID', 'GMAIL_CLUESTR_SECRET', 'GMAIL_CONNECT_URL', 'GMAIL_CALLBACK_URL'];
 mandatories.forEach(function(mandatory) {
   if(!process.env[mandatory]) {
     console.log(mandatory + " missing, the provider may fail.");
