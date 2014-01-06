@@ -2,7 +2,7 @@
 
 // Load configuration and initialize server
 var cluestrProvider = require('cluestr-provider');
-var serverConfig = require('./lib/provider-gmail');
+var serverConfig = require('./lib/');
 
 var server = cluestrProvider.createServer(serverConfig);
 

@@ -5,7 +5,7 @@ var async = require('async');
 var request = require('request');
 
 var config = require('../config/configuration.js');
-var retrieveAccountMail = require('../lib/provider-gmail/helpers/retrieve-account-mail.js');
+var retrieveAccountMail = require('../lib/helpers/retrieve-account-mail.js');
 
 /**
  * Use the Google refresh token to get a new accessToken,
