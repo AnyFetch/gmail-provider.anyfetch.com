@@ -42,7 +42,7 @@ describe("Workflow", function () {
       task.metadatas.should.have.property('subject');
       task.metadatas.should.have.property('text');
       task.should.have.property('datas');
-      task.should.have.property('semantic_document_type', 'email');
+      task.should.have.property('document_type', 'email');
 
       nbMailsChecked += 1;
       if(nbMailsChecked === 5) {
