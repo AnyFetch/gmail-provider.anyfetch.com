@@ -30,7 +30,7 @@ describe("Workflow", function () {
     }, done);
   });
 
-  it.skip("should upload datas to Cluestr", function (done) {
+  it("should upload datas to Cluestr", function (done) {
     var nbMailsChecked = 0;
 
     var originalQueueWorker = serverConfig.queueWorker;
