@@ -5,7 +5,7 @@ var CluestrProvider = require('cluestr-provider');
 require('should');
 
 var config = require('../config/configuration.js');
-var serverConfig = require('../lib/provider-gmail');
+var serverConfig = require('../lib/');
 
 
 
