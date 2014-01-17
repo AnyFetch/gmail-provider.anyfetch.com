@@ -1,6 +1,6 @@
 'use strict';
 
-var retrieve = require('./lib/provider-gmail/helpers/retrieve.js');
+var retrieve = require('./lib/helpers/retrieve.js');
 var config = require('./config/configuration.js');
 var fs = require('fs');
 
