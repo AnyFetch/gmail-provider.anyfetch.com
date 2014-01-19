@@ -16,7 +16,7 @@ describe("Retrieve code", function () {
       should.exist(mails[0]);
 
       console.log("Length of the mails : ", mails.length);
-      mails.length.should.have.above(10);
+      mails.length.should.have.above(9);
 
       done();
     });
@@ -32,7 +32,7 @@ describe("Retrieve code", function () {
         throw err;
       }
       console.log("Length of the mails : ", mails.length);
-      mails.length.should.have.above(7);
+      mails.length.should.have.above(6);
       done();
     });
   });
