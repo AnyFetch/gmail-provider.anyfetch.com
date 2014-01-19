@@ -6,8 +6,8 @@ var fs = require('fs');
 
 var mails = 0;
 var cb = function(datas) {
-  mails += 1;
-  console.log('----------' + mails);
+  //mails += 1;
+  //console.log('----------' + mails);
   //fs.appendFile("log-imap-debug.txt", '----------' + mails + "\n");
   //console.log("URL:", datas.actions.show);
   //console.log("uId:", datas.datas.uid);
@@ -22,6 +22,7 @@ var cb = function(datas) {
 
 retrieve(config.test_refresh_token, config.test_account, 1, cb, function(err) {
   if(err) {
+    console.log("error");
     throw err;
   }
 
