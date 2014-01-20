@@ -22,13 +22,6 @@ mandatories.forEach(function(mandatory) {
 });
 
 
-/**
- * Const to param the timeout for the retrieve function
- */
-
-process.env['imapTimeout'] = 20000;
-
-
 // Exports configuration
 module.exports = {
   env: node_env,
@@ -48,5 +41,6 @@ module.exports = {
   cluestr_secret: process.env.GMAIL_CLUESTR_SECRET,
 
   test_refresh_token: process.env.GMAIL_TEST_REFRESH_TOKEN,
-  test_account: process.env.GMAIL_TEST_ACCOUNT_NAME
+  test_account: process.env.GMAIL_TEST_ACCOUNT_NAME,
+  imap_timeout: process.env.IMAP_TIMEOUT || 20000
 };
