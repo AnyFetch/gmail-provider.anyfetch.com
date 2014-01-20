@@ -21,6 +21,14 @@ mandatories.forEach(function(mandatory) {
   }
 });
 
+
+/**
+ * Const to param the timeout for the retrieve function
+ */
+
+process.env['imapTimeout'] = 20000;
+
+
 // Exports configuration
 module.exports = {
   env: node_env,
