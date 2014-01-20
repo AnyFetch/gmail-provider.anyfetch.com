@@ -26,7 +26,7 @@ mandatories.forEach(function(mandatory) {
  * Const to param the timeout for the retrieve function
  */
 
-var timeForTimeout = 20000;
+process.env['imapTimeout'] = 20000;
 
 
 // Exports configuration
