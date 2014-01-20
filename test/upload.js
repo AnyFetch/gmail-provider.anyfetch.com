@@ -34,22 +34,29 @@ describe("Workflow", function () {
     var nbMailsChecked = 0;
 
     var originalQueueWorker = serverConfig.queueWorker;
-    serverConfig.queueWorker = function(task, cluestrClient, refreshToken, cb) {
-      task.should.have.property('identifier');
-      task.should.have.property('actions');
-      task.should.have.property('metadatas');
-      task.metadatas.should.have.property('from');
-      task.metadatas.should.have.property('subject');
-      task.metadatas.should.have.property('text');
-      task.should.have.property('datas');
-      task.should.have.property('document_type', 'email');
+
+    serverConfig.queueWorker = function(task, cluestrClient, refreshToken, cb) { console.log("banane")
+      var mail = originalQueueWorker(task, cluestrClient, refreshToken, cb);
+
+      try {
+        mail.should.have.property('identifier');
+        mail.should.have.property('actions');
+        mail.should.have.property('metadatas');
+        mail.metadatas.should.have.property('from');
+        mail.metadatas.should.have.property('subject');
+        mail.metadatas.should.have.property('text');
+        mail.should.have.property('datas');
+        mail.should.have.property('document_type', 'email');
+      }
+      catch(e) {
+        return done(e);
+      }
 
       nbMailsChecked += 1;
+      console.log(nbMailsChecked , "banene")
       if(nbMailsChecked === 5) {
         done();
       }
-      
-      originalQueueWorker(task, cluestrClient, cb);
     };
     
     var server = CluestrProvider.createServer(serverConfig);
