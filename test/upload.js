@@ -35,7 +35,7 @@ describe("Workflow", function () {
 
     var originalQueueWorker = serverConfig.queueWorker;
 
-    serverConfig.queueWorker = function(task, cluestrClient, refreshToken, cb) { console.log("banane")
+    serverConfig.queueWorker = function(task, cluestrClient, refreshToken, cb) {
       var mail = originalQueueWorker(task, cluestrClient, refreshToken, cb);
 
       try {
@@ -53,7 +53,6 @@ describe("Workflow", function () {
       }
 
       nbMailsChecked += 1;
-      console.log(nbMailsChecked , "banene")
       if(nbMailsChecked === 5) {
         done();
       }
