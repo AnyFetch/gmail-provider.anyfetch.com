@@ -14,6 +14,10 @@
     {
       "name": "Julien Balian",
       "email": "julien.balian@supinfo.com"
+    },
+    {
+      "name": "Florian Rossiaud",
+      "email": "florianrossiaud@gmail.com"
     }
   ],
   "bin": {
@@ -24,7 +28,7 @@
     "test": "NODE_ENV=test mocha -R spec -t 15000",
     "lint": "jshint lib/ test/ config/ bin/"
   },
-  "main": "./lib/provider-gmail",
+  "main": "./lib/",
   "repository": {
     "type": "git",
     "url": "https://github.com/Papiel/provider-gmail"
