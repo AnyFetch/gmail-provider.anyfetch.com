@@ -1,7 +1,7 @@
 'use strict';
 
 var request = require('supertest');
-var CluestrProvider = require('cluestr-provider');
+var AnyFetchProvider = require('anyfetch-provider');
 require('should');
 
 var config = require('../config/configuration.js');
@@ -10,18 +10,18 @@ var serverConfig = require('../lib/');
 
 
 describe("Workflow", function () {
-  before(CluestrProvider.debug.cleanTokens);
+  before(AnyFetchProvider.debug.cleanTokens);
 
   // Create a fake HTTP server
-  process.env.CLUESTR_SERVER = 'http://localhost:1337';
+  process.env.ANYFETCH_SERVER = 'http://localhost:1337';
 
   // Create a fake HTTP server
-  var apiServer = CluestrProvider.debug.createTestApiServer();
+  var apiServer = AnyFetchProvider.debug.createTestApiServer();
   apiServer.listen(1337);
 
   before(function(done) {
-    CluestrProvider.debug.createToken({
-      cluestrToken: 'fake_gc_access_token',
+    AnyFetchProvider.debug.createToken({
+      anyfetchToken: 'fake_gc_access_token',
       datas: {
         refreshToken: config.test_refresh_token,
         mail : config.test_account
@@ -30,11 +30,11 @@ describe("Workflow", function () {
     }, done);
   });
 
-  it.skip("should upload datas to Cluestr", function (done) {
+  it.skip("should upload datas to AnyFetch", function (done) {
     var nbMailsChecked = 0;
 
     var originalQueueWorker = serverConfig.queueWorker;
-    serverConfig.queueWorker = function(task, cluestrClient, refreshToken, cb) {
+    serverConfig.queueWorker = function(task, anyfetchClient, refreshToken, cb) {
       task.should.have.property('identifier');
       task.should.have.property('actions');
       task.should.have.property('metadatas');
@@ -49,10 +49,10 @@ describe("Workflow", function () {
         done();
       }
       
-      originalQueueWorker(task, cluestrClient, cb);
+      originalQueueWorker(task, anyfetchClient, cb);
     };
     
-    var server = CluestrProvider.createServer(serverConfig);
+    var server = AnyFetchProvider.createServer(serverConfig);
 
     request(server)
       .post('/update')
