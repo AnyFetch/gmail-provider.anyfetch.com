@@ -27,7 +27,7 @@
   "main": "./lib/provider-gmail",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Papiel/provider-gmail"
+    "url": "https://github.com/Papiel/gmail.provider.anyfetch.com"
   },
   "keywords": [
     "anyfetch",
