@@ -50,7 +50,7 @@
     "should": "2.1.x",
     "supertest": "0.8.x"
   },
-  "licence": "Copyright Papiel",
+  "licence": "MIT",
   "engines": {
     "node": ">=0.10"
   }
