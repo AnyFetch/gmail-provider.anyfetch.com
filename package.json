@@ -1,5 +1,5 @@
 {
-  "name": "cluestr-provider-gmail",
+  "name": "anyfetch-provider-gmail",
   "version": "0.1.0",
   "author": "Matthieu Bacconnier <matthieu.bacconnier@papiel.fr>",
   "contributors": [
@@ -27,10 +27,10 @@
   "main": "./lib/provider-gmail",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Papiel/provider-gmail"
+    "url": "https://github.com/Papiel/gmail.provider.anyfetch.com"
   },
   "keywords": [
-    "cluestr",
+    "anyfetch",
     "provider",
     "gmail"
   ],
@@ -38,7 +38,7 @@
     "async": "0.2.x",
     "request": "2.30.x",
     "sspawn": "0.1.1",
-    "cluestr-provider": "0.x.x",
+    "anyfetch-provider": "0.x.x",
     "googleapis": "0.4.x",
     "imap": "0.8.x",
     "mailparser": "0.3.6",
