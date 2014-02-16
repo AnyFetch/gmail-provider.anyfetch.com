@@ -14,7 +14,7 @@ if(node_env === "production") {
   default_port = 80;
 }
 
-var mandatories = ['GMAIL_ID', 'GMAIL_SECRET', 'GMAIL_CLUESTR_ID', 'GMAIL_CLUESTR_SECRET', 'GMAIL_CONNECT_URL', 'GMAIL_CALLBACK_URL'];
+var mandatories = ['GMAIL_ID', 'GMAIL_SECRET', 'GMAIL_ANYFETCH_ID', 'GMAIL_ANYFETCH_SECRET', 'GMAIL_CONNECT_URL', 'GMAIL_CALLBACK_URL'];
 mandatories.forEach(function(mandatory) {
   if(!process.env[mandatory]) {
     console.log(mandatory + " missing, the provider may fail.");
@@ -37,8 +37,8 @@ module.exports = {
 
 
   connect_url: process.env.GMAIL_CONNECT_URL,
-  cluestr_id: process.env.GMAIL_CLUESTR_ID,
-  cluestr_secret: process.env.GMAIL_CLUESTR_SECRET,
+  anyfetch_id: process.env.GMAIL_ANYFETCH_ID,
+  anyfetch_secret: process.env.GMAIL_ANYFETCH_SECRET,
 
   test_refresh_token: process.env.GMAIL_TEST_REFRESH_TOKEN,
   test_account: process.env.GMAIL_TEST_ACCOUNT_NAME,
