@@ -53,7 +53,7 @@ describe("Workflow", function () {
       }
 
       nbMailsChecked += 1;
-      if(nbMailsChecked === 5) {
+      if(nbMailsChecked === 3) {
         done();
       }
     };
