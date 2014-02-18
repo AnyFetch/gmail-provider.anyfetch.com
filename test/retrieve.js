@@ -9,16 +9,18 @@ describe("Retrieve code", function () {
     var mails = [];
     retrieve(config.test_refresh_token, config.test_account, 1, function(mail) {
       mails.push(mail);
-    },function (err, lastUid) {
+    }, function (err) {
       if(err) {
         throw err;
       }
       should.exist(mails[0]);
 
-      console.log("Length of the mails : ", mails.length);
-      mails.length.should.have.above(9);
+      mails.length.should.be.above(5);
 
-      done();
+      if(!done.called) {
+        done();
+        done.called = true;
+      }
     });
   });
 
@@ -31,9 +33,12 @@ describe("Retrieve code", function () {
       if(err) {
         throw err;
       }
-      console.log("Length of the mails : ", mails.length);
-      mails.length.should.have.above(6);
-      done();
+      mails.length.should.have.above(3);
+
+      if(!done.called) {
+        done();
+        done.called = true;
+      }
     });
   });
 });
