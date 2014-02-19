@@ -1,7 +1,7 @@
 'use strict';
 
 var request = require('supertest');
-var AnyfetchProvider = require('anyfetch-provider');
+var CluestrProvider = require('cluestr-provider');
 require('should');
 
 var config = require('../config/configuration.js');
@@ -10,18 +10,18 @@ var serverConfig = require('../lib/');
 
 
 describe("Workflow", function () {
-  before(AnyfetchProvider.debug.cleanTokens);
+  before(CluestrProvider.debug.cleanTokens);
 
   // Create a fake HTTP server
-  process.env.ANYFETCH_SERVER_URL = 'http://localhost:1337';
+  process.env.CLUESTR_SERVER = 'http://localhost:1337';
 
   // Create a fake HTTP server
-  var apiServer = AnyfetchProvider.debug.createTestApiServer();
+  var apiServer = CluestrProvider.debug.createTestApiServer();
   apiServer.listen(1337);
 
   before(function(done) {
-    AnyfetchProvider.debug.createToken({
-      anyfetchToken: 'fake_gc_access_token',
+    CluestrProvider.debug.createToken({
+      cluestrToken: 'fake_gc_access_token',
       datas: {
         refreshToken: config.test_refresh_token,
         mail : config.test_account
@@ -30,13 +30,13 @@ describe("Workflow", function () {
     }, done);
   });
 
-  it("should upload datas to Anyfetch", function (done) {
+  it("should upload datas to Cluestr", function (done) {
     var nbMailsChecked = 0;
 
     var originalQueueWorker = serverConfig.queueWorker;
 
-    serverConfig.queueWorker = function(task, anyfetchClient, refreshToken, cb) {
-      var mail = originalQueueWorker(task, anyfetchClient, refreshToken, cb);
+    serverConfig.queueWorker = function(task, cluestrClient, refreshToken, cb) {
+      var mail = originalQueueWorker(task, cluestrClient, refreshToken, cb);
 
       try {
         mail.should.have.property('identifier');
@@ -57,8 +57,8 @@ describe("Workflow", function () {
         done();
       }
     };
-
-    var server = AnyfetchProvider.createServer(serverConfig);
+    
+    var server = CluestrProvider.createServer(serverConfig);
 
     request(server)
       .post('/update')

@@ -1,10 +1,10 @@
 "use strict";
 
 // Load configuration and initialize server
-var AnyfetchProvider = require('anyfetch-provider');
+var cluestrProvider = require('cluestr-provider');
 var serverConfig = require('./lib/');
 
-var server = AnyfetchProvider.createServer(serverConfig);
+var server = cluestrProvider.createServer(serverConfig);
 
 // Expose the server
 module.exports = server;
