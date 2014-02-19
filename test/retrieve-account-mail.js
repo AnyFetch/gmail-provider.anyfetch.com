@@ -28,11 +28,11 @@ var refreshAccessToken = function(refreshToken, cb) {
   };
 
   request.post(params, function (err, res) {
-    if(err){
+    if(err) {
       return cb(err);
     }
 
-    if(res.statusCode === 401){
+    if(res.statusCode === 401) {
       return cb(new Error("Access to this refresh_token has been revoked."));
     }
     if(res.statusCode !== 200) {

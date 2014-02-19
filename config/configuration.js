@@ -21,6 +21,7 @@ mandatories.forEach(function(mandatory) {
   }
 });
 
+
 // Exports configuration
 module.exports = {
   env: node_env,
@@ -40,5 +41,6 @@ module.exports = {
   anyfetch_secret: process.env.GMAIL_ANYFETCH_SECRET,
 
   test_refresh_token: process.env.GMAIL_TEST_REFRESH_TOKEN,
-  test_account: process.env.GMAIL_TEST_ACCOUNT_NAME
+  test_account: process.env.GMAIL_TEST_ACCOUNT_NAME,
+  imap_timeout: process.env.IMAP_TIMEOUT || 20000
 };

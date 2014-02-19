@@ -9,28 +9,36 @@ describe("Retrieve code", function () {
     var mails = [];
     retrieve(config.test_refresh_token, config.test_account, 1, function(mail) {
       mails.push(mail);
-    },function (err, lastUid) {
+    }, function (err) {
       if(err) {
         throw err;
       }
       should.exist(mails[0]);
 
-      lastUid.should.be.above(8);
+      mails.length.should.be.above(5);
 
-      done();
+      if(!done.called) {
+        done();
+        done.called = true;
+      }
     });
   });
 
   it("should list mails modified after specified uid", function (done) {
     var mails = [];
+
     retrieve(config.test_refresh_token, config.test_account, 4, function(mail) {
       mails.push(mail);
     }, function (err) {
       if(err) {
         throw err;
       }
-      mails.length.should.have.above(6);
-      done();
+      mails.length.should.have.above(3);
+
+      if(!done.called) {
+        done();
+        done.called = true;
+      }
     });
   });
 });
