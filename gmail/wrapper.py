@@ -26,6 +26,7 @@ for mail in mails:
         "id": mail.message_id,
         "uid": mail.uid,
         "thread_id": mail.thread_id,
+        "date": mail.sent_at.isoformat(),
         "url": "https://mail.google.com/mail/b/%s/?cm#all/%s" % (account, hex_id),
         "from": mail.fr,
         "to": mail.to,
@@ -35,7 +36,6 @@ for mail in mails:
     }
 
     print json.dumps(json_mail)
-
     if mail != mails[-1]:
         print ","
 
