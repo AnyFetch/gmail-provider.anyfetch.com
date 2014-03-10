@@ -9,11 +9,11 @@ var serverConfig = require('../lib/');
 
 
 
-describe("Workflow", function () {
+describe.only("Workflow", function () {
   before(AnyFetchProvider.debug.cleanTokens);
 
   // Create a fake HTTP server
-  process.env.ANYFETCH_SERVER = 'http://localhost:1337';
+  process.env.ANYFETCH_API_URL = 'http://localhost:1337';
 
   // Create a fake HTTP server
   var apiServer = AnyFetchProvider.debug.createTestApiServer();

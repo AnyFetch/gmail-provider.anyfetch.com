@@ -44,10 +44,9 @@
     "sspawn": "0.1.1",
     "anyfetch-provider": "0.x.x",
     "googleapis": "0.6.x",
-    "imap": "0.8.x",
-    "mailparser": "0.4.1",
     "xoauth2": "0.1.x",
-    "newrelic": "1.x.x"
+    "newrelic": "1.x.x",
+    "JSONStream": "~0.8.0"
   },
   "devDependencies": {
     "mocha": "1.17.x",
