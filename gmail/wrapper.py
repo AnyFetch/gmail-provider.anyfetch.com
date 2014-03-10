@@ -8,7 +8,7 @@ from_uid = sys.argv[3]
 
 g = gmail.authenticate(account, token)
 
-mails = g.inbox().mail(custom_query=['UID', '%s:*' % from_uid])
+mails = g.all_mail().mail(custom_query=['UID', '%s:*' % from_uid])
 
 # Start our JSON array
 print "["

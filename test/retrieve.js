@@ -15,7 +15,7 @@ describe("Retrieve code", function () {
       }
       should.exist(mails[0]);
 
-      mails.length.should.be.above(4);
+      mails.length.should.be.above(10);
 
       if(!done.called) {
         done();
@@ -27,13 +27,13 @@ describe("Retrieve code", function () {
   it("should list mails modified after specified uid", function (done) {
     var mails = [];
 
-    retrieve(config.test_refresh_token, config.test_account, 4, function(mail) {
+    retrieve(config.test_refresh_token, config.test_account, 5, function(mail) {
       mails.push(mail);
     }, function (err) {
       if(err) {
         throw err;
       }
-      mails.length.should.have.above(3);
+      mails.length.should.be.above(4);
 
       if(!done.called) {
         done();
