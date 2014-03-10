@@ -1,0 +1,3 @@
+[submodule "python/gmail"]
+	path = python/gmail
+	url = git@github.com:Neamar/gmail.git
