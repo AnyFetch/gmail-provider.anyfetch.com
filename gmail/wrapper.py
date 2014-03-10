@@ -1,9 +1,17 @@
+import sys
 import gmail
 import json
 
-g = gmail.authenticate("test.cluestr@gmail.com", "ya29.1.AADtN_W1FextCLPrI8aZx2kS-jAL-SSZ5nnlAskJnlZFdbVpo3sdVcMY8T5SH0WB6mw")
+account = sys.argv[1]
+token = sys.argv[2]
+from_uid = sys.argv[3]
+
+g = gmail.authenticate(account, token)
 
 mails = g.inbox().mail(custom_query=['UID', '11:*'])
+
+# Start our JSON array
+print "["
 
 for mail in mails:
     mail.fetch()
@@ -20,3 +28,9 @@ for mail in mails:
     }
 
     print json.dumps(json_mail)
+
+    if mail != mails[-1]:
+        print ","
+
+# End of JSON
+print "]"
