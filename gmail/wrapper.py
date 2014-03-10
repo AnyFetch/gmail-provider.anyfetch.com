@@ -8,7 +8,11 @@ from_uid = sys.argv[3]
 
 g = gmail.authenticate(account, token)
 
-mails = g.all_mail().mail(custom_query=['UID', '%s:*' % from_uid])
+# Find the mailbox with the "\All" attribute
+all_mail = [name for name, m in g.mailboxes.items() if "\\All" in m.attrs][0]
+
+
+mails = g.mailbox(all_mail).mail(custom_query=['UID', '%s:*' % from_uid])
 
 # Start our JSON array
 print "["
