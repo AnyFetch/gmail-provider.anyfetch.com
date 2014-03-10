@@ -9,7 +9,7 @@ var serverConfig = require('../lib/');
 
 
 
-describe.only("Workflow", function () {
+describe("Workflow", function () {
   before(AnyFetchProvider.debug.cleanTokens);
 
   // Create a fake HTTP server
@@ -36,29 +36,33 @@ describe.only("Workflow", function () {
     var originalQueueWorker = serverConfig.queueWorker;
 
     serverConfig.queueWorker = function(task, anyfetchClient, refreshToken, cb) {
-      var mail = originalQueueWorker(task, anyfetchClient, refreshToken, cb);
+      originalQueueWorker(task, anyfetchClient, refreshToken, function(err, document) {
+        if(err) {
+          throw err;
+        }
 
-      try {
-        mail.should.have.property('identifier');
-        mail.should.have.property('actions');
-        mail.should.have.property('metadatas');
-        mail.metadatas.should.have.property('from');
-        mail.metadatas.should.have.property('subject');
-        mail.metadatas.should.have.property('text');
-        mail.should.have.property('datas');
-        mail.should.have.property('document_type', 'email');
-      }
-      catch(e) {
-        return done(e);
-      }
+        try {
+          document.should.have.property('identifier');
+          document.should.have.property('actions');
+          document.should.have.property('metadatas');
+          document.metadatas.should.have.property('from');
+          document.metadatas.should.have.property('subject');
+          document.metadatas.should.have.property('text');
+          document.should.have.property('datas');
+          document.should.have.property('document_type', 'email');
+        }
+        catch(e) {
+          return done(e);
+        }
 
-      nbMailsChecked += 1;
-      if(nbMailsChecked === 3) {
-        done();
-      }
+        nbMailsChecked += 1;
+        cb();
 
-      cb();
-      //originalQueueWorker(task, anyfetchClient, cb);
+        if(nbMailsChecked === 10) {
+          done();
+        }
+
+      });
     };
 
     var server = AnyFetchProvider.createServer(serverConfig);
