@@ -1,5 +1,5 @@
 import sys
-import gmail
+from lib import gmail
 import json
 
 account = sys.argv[1]
