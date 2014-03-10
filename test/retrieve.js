@@ -15,7 +15,7 @@ describe("Retrieve code", function () {
       }
       should.exist(mails[0]);
 
-      mails.length.should.be.above(5);
+      mails.length.should.be.above(4);
 
       if(!done.called) {
         done();

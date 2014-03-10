@@ -20,14 +20,14 @@ for mail in mails:
 
     json_mail = {
         "id": mail.message_id,
-        "url": "https://mail.google.com/mail/b/%s/?cm#all/%s" % (account, hex_id),
         "uid": mail.uid,
         "thread_id": mail.thread_id,
+        "url": "https://mail.google.com/mail/b/%s/?cm#all/%s" % (account, hex_id),
         "from": mail.fr,
         "to": mail.to,
         "subject": mail.subject,
-        # "text": mail.body,
-        # "html": mail.html,
+        "text": mail.body,
+        "html": mail.html,
     }
 
     print json.dumps(json_mail)
