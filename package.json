@@ -42,7 +42,7 @@
     "async": "0.2.x",
     "request": "2.33.x",
     "sspawn": "0.1.1",
-    "anyfetch-provider": "0.x.x",
+    "anyfetch-provider": ">=0.3.9",
     "googleapis": "0.6.x",
     "xoauth2": "0.1.x",
     "newrelic": "1.x.x",
