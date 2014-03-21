@@ -4,7 +4,7 @@
 AnyFetch provider for mails stored in Gmail
 
 # How to install?
-Vagrant up everything (`vagrant up`, `vagrant ssh`).
+Clone the repo, then `npm install`, `git submodule init`, `git submodule update`.
 
 Create a `keys.sh` file on the directory root:
 
