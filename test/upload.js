@@ -39,14 +39,22 @@ describe("Workflow", function () {
         }
 
         try {
+          document.should.have.property('document_type');
           document.should.have.property('identifier');
           document.should.have.property('actions');
           document.should.have.property('metadatas');
-          document.metadatas.should.have.property('from');
-          document.metadatas.should.have.property('subject');
-          document.metadatas.should.have.property('text');
-          document.should.have.property('datas');
-          document.should.have.property('document_type', 'email');
+
+          if(document.document_type === "email") {
+            document.metadatas.should.have.property('from');
+            document.metadatas.should.have.property('subject');
+            document.metadatas.should.have.property('text');
+            document.should.have.property('datas');
+            document.should.have.property('document_type', 'email');
+          }
+          else {
+            document.metadatas.should.have.property('path');
+            document.should.have.property('document_type', 'file');
+          }
         }
         catch(e) {
           return done(e);
