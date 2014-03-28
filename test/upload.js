@@ -53,6 +53,7 @@ describe("Workflow", function () {
           }
           else {
             document.metadatas.should.have.property('path');
+            document.should.have.property('related');
             document.should.have.property('document_type', 'file');
           }
         }

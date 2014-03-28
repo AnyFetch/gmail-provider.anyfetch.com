@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "node ./bin/server",
-    "test": "NODE_ENV=test mocha -R spec -t 15000",
+    "test": "NODE_ENV=test mocha -R spec -t 15000 -s 2000",
     "lint": "jshint lib/ test/ config/ bin/"
   },
   "main": "./lib/",
