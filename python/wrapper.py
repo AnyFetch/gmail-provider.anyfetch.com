@@ -39,20 +39,21 @@ for mail in mails:
     print json.dumps(json_mail)
 
     for attachment in mail.attachments:
-        path = "/tmp/attachment-" + str(uuid.uuid4())
-        attachment.save(path)
+        if attachment.size is not None:
+            path = "/tmp/attachment-" + str(uuid.uuid4())
+            attachment.save(path)
 
-        json_attachment = {
-            "_type": "attachment",
-            "mail_id": json_mail['id'],
-            "mail_url": json_mail['url'],
-            "date": json_mail['date'],
-            "name": attachment.name,
-            "path": path
-        }
+            json_attachment = {
+                "_type": "attachment",
+                "mail_id": json_mail['id'],
+                "mail_url": json_mail['url'],
+                "date": json_mail['date'],
+                "name": attachment.name,
+                "path": path
+            }
 
-        print ","
-        print json.dumps(json_attachment)
+            print ","
+            print json.dumps(json_attachment)
 
     if mail != mails[-1]:
         print ","
