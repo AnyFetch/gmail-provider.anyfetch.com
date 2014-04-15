@@ -29,7 +29,6 @@ module.exports = {
   mongo_url: process.env.MONGO_URL || ("mongodb://localhost/provider-gmail-" + node_env),
 
   max_concurrency: process.env.GMAIL_MAX_CONCURRENCY || 5,
-  workers: process.env.WORKERS || 2,
 
   google_id: process.env.GMAIL_ID,
   google_secret: process.env.GMAIL_SECRET,
