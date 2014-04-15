@@ -34,6 +34,7 @@ for mail in mails:
         "subject": mail.subject,
         "text": mail.body,
         "html": mail.html,
+        "attachments": [a.name for a in mail.attachments if a.size is not None]
     }
 
     print json.dumps(json_mail)
