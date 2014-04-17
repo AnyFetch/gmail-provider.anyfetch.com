@@ -17,7 +17,8 @@ mails = g.mailbox(all_mail).mail(custom_query=['UID', '%s:*' % from_uid])
 # Start our JSON array
 print "["
 
-for mail in mails:
+while len(mails) > 0:
+    mail = mails.pop(0)
     mail.fetch()
 
     hex_id = str(hex(int(mail.thread_id)))[2:]
@@ -56,8 +57,10 @@ for mail in mails:
             print ","
             print json.dumps(json_attachment)
 
-    if mail != mails[-1]:
+    if len(mails) > 0:
         print ","
+
+    del mail
 
 # End of JSON
 print "]"
