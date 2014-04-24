@@ -16,7 +16,8 @@ def integrate_cid_in_html(mail):
                     extension = 'jpg'
                 image = base64.b64encode(attachment.payload)
                 mail.attachments.remove(attachment)
-                return re.sub('(alt|src)=.*' + cid + '.* />', '\1="' + cid + '" src=data:image/' + extension + ';base64,' + image + ' />', image_tag.group(0))
+
+                return re.sub('src="[^"]+"', 'src="data:image/' + extension + ';base64,' + image + '"', image_tag.group(0))
 
         return image_tag.group(0)
 
