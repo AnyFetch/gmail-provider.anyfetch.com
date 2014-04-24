@@ -2,6 +2,26 @@ import uuid
 import sys
 from gmail import gmail
 import json
+import re
+import base64
+
+
+def integrate_cid_in_html(mail):
+    def insert_cid(image_tag):
+        cid = image_tag.group(1)
+        for attachment in mail.attachments:
+            if attachment.name.startswith(cid):
+                extension = attachment.name[attachment.name.rfind('.') + 1:]
+                if extension == 'jpeg':
+                    extension = 'jpg'
+                image = base64.b64encode(attachment.payload)
+                mail.attachments.remove(attachment)
+                return re.sub('(alt|src)=.*' + cid + '.* />', '\1="' + cid + '" src=data:image/' + extension + ';base64,' + image + ' />', mail.html)
+
+        return image_tag.group(0)
+
+    mail.html = re.sub(r'<img[^>]*\"cid:([^"]+)\"[^>]*>', insert_cid, mail.html or "")
+
 
 account = sys.argv[1]
 token = sys.argv[2]
@@ -26,6 +46,8 @@ print "["
 while len(mails) > 0:
     mail = mails.pop(0)
     mail.fetch()
+
+    integrate_cid_in_html(mail)
 
     hex_id = str(hex(int(mail.thread_id)))[2:]
 
