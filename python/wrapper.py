@@ -16,7 +16,6 @@ def integrate_cid_in_html(mail):
                     extension = 'jpg'
                 image = base64.b64encode(attachment.payload)
                 mail.attachments.remove(attachment)
-                print re.sub('(alt|src)=.*' + cid + '.* />', '\1="' + cid + '" src=data:image/' + extension + ';base64,' + image + ' />', image_tag.group(0))
                 return re.sub('(alt|src)=.*' + cid + '.* />', '\1="' + cid + '" src=data:image/' + extension + ';base64,' + image + ' />', image_tag.group(0))
 
         return image_tag.group(0)
@@ -67,7 +66,7 @@ while len(mails) > 0:
         "attachments": [a.name for a in mail.attachments if a.size is not None]
     }
 
-     #print json.dumps(json_mail)
+     print json.dumps(json_mail)
 
     for attachment in mail.attachments:
         if attachment.size is not None:
@@ -84,7 +83,7 @@ while len(mails) > 0:
             }
 
             print ","
-            #print json.dumps(json_attachment)
+            print json.dumps(json_attachment)
 
     if len(mails) > 0:
         print ","
