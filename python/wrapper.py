@@ -66,7 +66,7 @@ while len(mails) > 0:
         "attachments": [a.name for a in mail.attachments if a.size is not None]
     }
 
-     print json.dumps(json_mail)
+    print json.dumps(json_mail)
 
     for attachment in mail.attachments:
         if attachment.size is not None:
