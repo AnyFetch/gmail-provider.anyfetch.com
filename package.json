@@ -41,7 +41,7 @@
   "dependencies": {
     "async": "0.2.x",
     "request": "2.34.x",
-    "anyfetch-provider": ">=0.3.11",
+    "anyfetch-provider": ">=0.3.13",
     "googleapis": "0.6.x",
     "xoauth2": "0.1.x",
     "newrelic": "1.x.x",
