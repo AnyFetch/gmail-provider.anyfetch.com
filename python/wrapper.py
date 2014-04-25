@@ -70,7 +70,7 @@ while len(mails) > 0:
     print json.dumps(json_mail)
 
     for attachment in mail.attachments:
-        if attachment.size is not None:
+        if attachment.size is not None and attachment.name is not None:
             path = "/tmp/attachment-" + str(uuid.uuid4())
             attachment.save(path)
 
