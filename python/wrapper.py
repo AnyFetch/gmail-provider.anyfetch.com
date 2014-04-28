@@ -1,3 +1,12 @@
+"""
+Return all mail and attachment from the user in JSON,
+Separating them by "\n\n".
+Returning a real JSON structure would explode any memory.
+
+Usage:
+python wrapper.py <account-email> <xoauth-token> <first-uid>
+"""
+
 import uuid
 import sys
 from gmail import gmail
@@ -41,8 +50,6 @@ mails = all_mail.mail(custom_query=['UID', '%s:*' % from_uid])
 # So we manually clean the cache.
 all_mail.messages = {}
 
-# Start our JSON array
-print "["
 
 while len(mails) > 0:
     mail = mails.pop(0)
@@ -83,13 +90,10 @@ while len(mails) > 0:
                 "path": path
             }
 
-            print ","
+            print "\n\n"
             print json.dumps(json_attachment)
 
     if len(mails) > 0:
-        print ","
+        print "\n\n"
 
     del mail
-
-# End of JSON
-print "]"
