@@ -6,38 +6,39 @@ var retrieve = require('../lib/helpers/retrieve.js');
 
 describe("Retrieve code", function () {
   it("should get all mails", function (done) {
-    var mails = [];
-    retrieve(config.test_refresh_token, config.test_account, 1, function(mail) {
-      mails.push(mail);
-    }, function (err) {
+    var allMails = [];
+
+    retrieve(config.test_refresh_token, config.test_account, 1, function(err, mails, lastUid) {
       if(err) {
         throw err;
       }
-      should.exist(mails[0]);
 
-      mails.length.should.be.above(10);
+      allMails = allMails.concat(mails);
 
-      if(!done.called) {
+      if(lastUid) {
+        should.exist(allMails[0]);
+
+        allMails.length.should.be.above(10);
+
         done();
-        done.called = true;
       }
     });
   });
 
   it("should list mails modified after specified uid", function (done) {
-    var mails = [];
+    var allMails = [];
 
-    retrieve(config.test_refresh_token, config.test_account, 5, function(mail) {
-      mails.push(mail);
-    }, function (err) {
+    retrieve(config.test_refresh_token, config.test_account, 5, function(err, mails, lastUid) {
       if(err) {
         throw err;
       }
-      mails.length.should.be.above(4);
 
-      if(!done.called) {
+      allMails = allMails.concat(mails);
+
+      if(lastUid) {
+        allMails.length.should.be.above(4);
+
         done();
-        done.called = true;
       }
     });
   });
