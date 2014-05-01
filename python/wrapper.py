@@ -36,6 +36,7 @@ def integrate_cid_in_html(mail):
 account = sys.argv[1]
 token = sys.argv[2]
 from_uid = sys.argv[3]
+reverse = len(sys.argv) > 4 and sys.argv[4] == "reverse"
 
 g = gmail.authenticate(account, token)
 
@@ -44,6 +45,9 @@ all_mail_name = [name for name, m in g.mailboxes.items() if "\\All" in m.attrs][
 all_mail = g.mailbox(all_mail_name)
 
 mails = all_mail.mail(custom_query=['UID', '%s:*' % from_uid])
+
+if reverse:
+    mails.reverse()
 
 # By default, mailbox keep a cache of their messages.
 # However this get really heavy pretty quick and leads to huge memory consumption.
