@@ -44,7 +44,12 @@ g = gmail.authenticate(account, token)
 all_mail_name = [name for name, m in g.mailboxes.items() if "\\All" in m.attrs][0]
 all_mail = g.mailbox(all_mail_name)
 
-mails = all_mail.mail(custom_query=['UID', '%s:*' % from_uid])
+if reverse:
+    span = "1:%s" % from_uid
+else:
+    span = "%s:*" % from_uid
+
+mails = all_mail.mail(custom_query=['UID', span])
 
 if reverse:
     mails.reverse()
