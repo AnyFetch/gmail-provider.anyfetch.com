@@ -8,7 +8,7 @@ describe("Retrieve code", function () {
   it("should get all mails", function (done) {
     var allMails = [];
 
-    retrieve(config.test_refresh_token, config.test_account, 1, function(err, mails, lastUid) {
+    retrieve(config.test_refresh_token, config.test_account, {reverse: false, uid: 1}, function(err, mails, lastUid) {
       if(err) {
         throw err;
       }
@@ -28,7 +28,7 @@ describe("Retrieve code", function () {
   it("should list mails modified after specified uid", function (done) {
     var allMails = [];
 
-    retrieve(config.test_refresh_token, config.test_account, 5, function(err, mails, lastUid) {
+    retrieve(config.test_refresh_token, config.test_account, {reverse: false, uid: 5}, function(err, mails, lastUid) {
       if(err) {
         throw err;
       }

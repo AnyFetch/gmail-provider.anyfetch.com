@@ -23,7 +23,10 @@ describe("Workflow", function () {
         refreshToken: config.test_refresh_token,
         mail : config.test_account
       },
-      cursor: 1
+      cursor: {
+        reverse: false,
+        uid: 1
+      },
     }, done);
   });
 
