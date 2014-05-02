@@ -39,17 +39,17 @@
     "gmail"
   ],
   "dependencies": {
-    "async": "0.2.x",
+    "async": "0.8.x",
     "request": "2.34.x",
     "anyfetch-provider": ">=0.3.13",
-    "googleapis": "0.6.x",
+    "googleapis": "0.7.x",
     "xoauth2": "0.1.x",
     "newrelic": "1.x.x"
   },
   "devDependencies": {
     "mocha": "1.18.x",
-    "should": "3.2.x",
-    "supertest": "0.10.x"
+    "should": "3.3.x",
+    "supertest": "0.12.x"
   },
   "licence": "MIT",
   "engines": {
