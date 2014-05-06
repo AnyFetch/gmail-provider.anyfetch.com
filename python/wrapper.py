@@ -59,7 +59,6 @@ if reverse:
 # So we manually clean the cache.
 all_mail.messages = {}
 
-
 while len(mails) > 0:
     mail = mails.pop(0)
     mail.fetch()
