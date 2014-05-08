@@ -28,7 +28,7 @@ module.exports = {
   port: process.env.PORT || default_port,
   mongo_url: process.env.MONGO_URL || ("mongodb://localhost/provider-gmail-" + node_env),
 
-  max_concurrency: process.env.GMAIL_MAX_CONCURRENCY || 5,
+  max_concurrency: process.env.GMAIL_MAX_CONCURRENCY || 10,
 
   google_id: process.env.GMAIL_ID,
   google_secret: process.env.GMAIL_SECRET,
