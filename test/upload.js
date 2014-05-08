@@ -46,11 +46,13 @@ describe("Workflow", function () {
           document.should.have.property('identifier');
           document.should.have.property('actions');
           document.should.have.property('metadatas');
+          document.should.have.property('creation_date');
 
           if(document.document_type === "email") {
             document.metadatas.should.have.property('from');
             document.metadatas.should.have.property('subject');
             document.metadatas.should.have.property('text');
+            document.metadatas.should.have.property('date');
             document.should.have.property('datas');
             document.should.have.property('document_type', 'email');
           }
