@@ -82,6 +82,11 @@ while len(mails) > 0:
         "attachments": [a.name for a in mail.attachments if a.size is not None]
     }
 
+    if not json_mail['text'] and json_mail['html']:
+        # Text with text/html without text/plain
+        json_mail['text'] = re.sub(r'(<!--.*?-->|<[^>]*>)', '', json_mail['html'])
+        json_mail['text'] = re.sub(r'(\s|\n)\1+', '\1', json_mail['text'])
+
     print json.dumps(json_mail)
 
     for attachment in mail.attachments:
