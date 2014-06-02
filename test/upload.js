@@ -19,7 +19,7 @@ describe("Workflow", function () {
   before(function(done) {
     AnyFetchProvider.debug.createToken({
       anyfetchToken: 'fake_gc_access_token',
-      datas: {
+      data: {
         refreshToken: config.test_refresh_token,
         mail : config.test_account
       },
@@ -30,7 +30,7 @@ describe("Workflow", function () {
     }, done);
   });
 
-  it("should upload datas to AnyFetch", function (done) {
+  it("should upload data to AnyFetch", function (done) {
     var nbMailsChecked = 0;
 
     var originalQueueWorker = serverConfig.queueWorker;
@@ -45,19 +45,19 @@ describe("Workflow", function () {
           document.should.have.property('document_type');
           document.should.have.property('identifier');
           document.should.have.property('actions');
-          document.should.have.property('metadatas');
+          document.should.have.property('metadata');
           document.should.have.property('creation_date');
 
           if(document.document_type === "email") {
-            document.metadatas.should.have.property('from');
-            document.metadatas.should.have.property('subject');
-            document.metadatas.should.have.property('text');
-            document.metadatas.should.have.property('date');
-            document.should.have.property('datas');
+            document.metadata.should.have.property('from');
+            document.metadata.should.have.property('subject');
+            document.metadata.should.have.property('text');
+            document.metadata.should.have.property('date');
+            document.should.have.property('data');
             document.should.have.property('document_type', 'email');
           }
           else {
-            document.metadatas.should.have.property('path');
+            document.metadata.should.have.property('path');
             document.should.have.property('related');
             document.should.have.property('document_type', 'file');
           }
