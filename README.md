@@ -35,10 +35,10 @@ export GMAIL_TEST_ACCOUNT_NAME="see-below"
 AnyFetch Core will call `/init/connect` with anyfetch Oauth-tokens. The user will be transparently redirected to Google consentment page.
 Google will then call us back on `/init/callback` with a `code` parameter. We'll trade the `code` for an `access_token` and a `refresh_token` and store it in the database, along with the AnyFetch tokens.
 
-We can now sync datas between Google and AnyFetch.
+We can now sync data between Google and AnyFetch.
 
 This is where the `upload` handler comes into play.
-The function will retrieve, for all the accounts, the mail created since the last run, and upload the datas to AnyFetch.
+The function will retrieve, for all the accounts, the mail created since the last run, and upload the data to AnyFetch.
 
 # How to test?
 Unfortunately, testing this module is really hard.
