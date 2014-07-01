@@ -1,5 +1,5 @@
 # Projects files
-keys.sh
+.env
 
 # OS Artifacts
 *.DS_Store
