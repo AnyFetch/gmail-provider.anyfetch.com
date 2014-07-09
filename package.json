@@ -44,7 +44,6 @@
     "anyfetch-provider": "^0.3.15",
     "googleapis": "0.7.x",
     "xoauth2": "0.1.x",
-    "newrelic": "1.x.x",
     "dotenv": "^0.4.0"
   },
   "devDependencies": {
