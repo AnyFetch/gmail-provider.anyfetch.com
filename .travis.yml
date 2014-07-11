@@ -8,9 +8,9 @@ env:
   global:
   - GMAIL_CONNECT_URL="http://localhost:8000/init/connect"
   - GMAIL_CALLBACK_URL="http://localhost:8000/init/callback"
-  - GMAIL_ANYFETCH_ID="fake"
-  - GMAIL_ANYFETCH_SECRET="fake"
-  - secure: BagjdwqnJtKwauyvCOCO2G3U5gXzbzWyOY6yOHyhrDN8kMoviFZP07bjmFn0KyQg3sGs3aMfZ3ZPPmbLbLiV3Es7SIGlPISQ/jMs+eweP7h1R0YagFmDdacOyhV4SbZg0nM2mSaoyyXPP6KFDhY31YxtH4Rs0Ea5mTkgA4xXzzY=
-  - secure: Tsy5QXxUcbzG8i352ZtFh/KkkRmL7pB+PqsVrVtsEVkbRWSKZ03i2diV1O/sPgyu+3o0V+FGygLeUcjsxbvZ681vi/uD98nJmVRtIFt8Y54ToBQv+3pKg3MolKF+hTEpghetMbTIUwKXC8jBdloLk+9FKFDvb7y7fCXAakO4Wr4=
-  - secure: J1FspSbgkqhdZMlCJsG7+ABjqA+FHNFobxP+epPnwz/t/OWSluFuLL/Bt4DyKchwpS5HJFJm+7NKItp4lKIgri6HO+vT2A+WGfCwXwiPd34SaR04JmD09UjLwSQwg9P19VyyJvyREaiAlpEr6wsErvW/blm32WrfcGBl2FvEspE=
-  - secure: E50SInqxhc/Kn14CaEUL2nNuiSOmjALpFFVeIfy6RRao3hVNx849dV2BUDUuZ5C+MMCvdtNyR+zEVyXN5+mMPPyUDtUD+a8kk43Ns6N+TRuvB6dyfsZoxz5DNvy7oGSudQQXDSyFPPCMBGj8bQOM8HRKghHRvJqTt+KyNmURFI0=
+  - ANYFETCH_API_ID="fake"
+  - ANYFETCH_API_SECRET="fake"
+  - secure: A+EqGWgcgTQPi8WBwWvJiJEHAEmCESoGwqo1f9uLjooL2BHHVJEf9AnfRvvK1OSqri72IcN1tYrIfk6mK1NvH80Bowd4gmZY3hlDjdJCR3gMLYQbClGRhgUjZSOrezluT6jfxrykzrD7D6CWMufrl3mi0WkAx7okx+z6NYTIO7Y=
+  - secure: eqXo6FZEKXZ6gShvHrqFel1xdBIBCpALubgk9R8sOZ6rj/n9azR7JT8Vr8SESoDcEVVQLZz812JUukR7t1biLBpRuYYhVrF2R9r4fWYPnFL/bJyL048nnTZWWFne3PGr3r2eaUKdP4gCddXP/GZkI9Odk/GdZ4WeSf1vKzxQPAk=
+  - secure: di3x5j9hdQTi5ak7aqpoumTTaZJoRR5C77YYpX6RiLSMDMg5TqjTtUN4bwoIqEw2e7UCn0VabSpcAGyj+v1zez5YWC2eHWSFdvp7Oz2FDiT6Uqb9yqGUwYXBiShbZeTfZFk1xpFObf+PseYevVr4+LrnC5i/uQ0Exe0E/7kl20A=
+  - secure: OrdM+a427B7tWMWk5HU4+xlfcP/kX3a+XI3nTkMFeqso+cO1cIZT+/LqC2cM2ioOcyQq4su3SsfjsnqE4NrHJAmtmRAk2MVMKZRvnQmgcsyG7n8UkV60jaUxogk/5XsAn7reUmYqodt839vzTaoPX5Lgilzif0f+Nu+QvMAF2xA=
