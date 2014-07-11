@@ -18,7 +18,7 @@ if(node_env === "production") {
   default_port = 80;
 }
 
-var mandatories = ['GMAIL_ID', 'GMAIL_SECRET', 'GMAIL_ANYFETCH_ID', 'GMAIL_ANYFETCH_SECRET', 'GMAIL_CONNECT_URL', 'GMAIL_CALLBACK_URL'];
+var mandatories = ['GMAIL_API_ID', 'GMAIL_API_SECRET', 'ANYFETCH_API_ID', 'ANYFETCH_API_SECRET', 'GMAIL_CONNECT_URL', 'GMAIL_CALLBACK_URL'];
 mandatories.forEach(function(mandatory) {
   if(!process.env[mandatory]) {
     console.log(mandatory + " missing, the provider may fail.");
@@ -30,18 +30,19 @@ mandatories.forEach(function(mandatory) {
 module.exports = {
   env: node_env,
   port: process.env.PORT || default_port,
-  mongo_url: process.env.MONGO_URL || ("mongodb://localhost/provider-gmail-" + node_env),
+
+  mongo_url: process.env.MONGO_URL || process.env.MONGOLAB_URI,
+  redisUrl: process.env.REDIS_URL || process.env.REDISCLOUD_URL,
 
   max_concurrency: process.env.GMAIL_MAX_CONCURRENCY || 10,
 
-  google_id: process.env.GMAIL_ID,
-  google_secret: process.env.GMAIL_SECRET,
+  google_id: process.env.GMAIL_API_ID,
+  google_secret: process.env.GMAIL_API_SECRET,
   google_callback: process.env.GMAIL_CALLBACK_URL,
 
-
   connect_url: process.env.GMAIL_CONNECT_URL,
-  anyfetch_id: process.env.GMAIL_ANYFETCH_ID,
-  anyfetch_secret: process.env.GMAIL_ANYFETCH_SECRET,
+  anyfetch_id: process.env.ANYFETCH_API_ID,
+  anyfetch_secret: process.env.ANYFETCH_API_SECRET,
 
   test_refresh_token: process.env.GMAIL_TEST_REFRESH_TOKEN,
   test_account: process.env.GMAIL_TEST_ACCOUNT_NAME,

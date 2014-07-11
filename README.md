@@ -12,15 +12,15 @@ You'll need to define some environment variables
 
 ```sh
 # Go to https://code.google.com/apis/console/b/0/?pli=1#access to ask from app id and secret
-export GMAIL_ID="gmail-app-id"
-export GMAIL_SECRET="gmail-app-secret"
+export GMAIL_API_ID="gmail-app-id"
+export GMAIL_API_SECRET="gmail-app-secret"
 
 # Callback after google consent, most probably http://your-host/init/callback
 export GMAIL_CALLBACK_URL="url-for-callback"
 
 # AnyFetch app id and secret
-export GMAIL_ANYFETCH_ID="anyfetch-app-id"
-export GMAIL_ANYFETCH_SECRET="anyfetch-app-secret"
+export ANYFETCH_API_ID="anyfetch-app-id"
+export ANYFETCH_API_SECRET="anyfetch-app-secret"
 
 # Number of mails to retrieve in one run.
 # Will be patched when running tests
