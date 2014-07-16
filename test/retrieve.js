@@ -24,7 +24,7 @@ describe("Retrieve code", function () {
         };
         
         oauth2Client.credentials = tokens;
-        retrieve(client, oauth2Client, options, 0, [], cb);
+        retrieve(client, oauth2Client, options, new Date(1970), [], cb);
       },
       function checkMails(newCursor, mails, cb) {
         should.exist(mails[0]);
@@ -51,11 +51,11 @@ describe("Retrieve code", function () {
         };
         
         oauth2Client.credentials = tokens;
-        retrieve(client, oauth2Client, options, parseInt('141eb0d91ca56fb5', 16), [], cb);
+        retrieve(client, oauth2Client, options, new Date("Thu Oct 24 2013 14:19:57 GMT+0200 (CEST)"), [], cb);
       },
       function checkMails(newCursor, mails, cb) {
         should.exist(mails[0]);
-        mails.length.should.be.above(4);
+        mails.length.should.eql(9);
         parseInt(mails[0].id, 16).should.be.below(parseInt(mails[1].id, 16));
         cb(null);
       }
