@@ -55,7 +55,7 @@ describe("Retrieve code", function () {
       },
       function checkMails(newCursor, mails, cb) {
         should.exist(mails[0]);
-        mails.length.should.eql(9);
+        mails.length.should.be.above(8);
         parseInt(mails[0].id, 16).should.be.below(parseInt(mails[1].id, 16));
         cb(null);
       }
