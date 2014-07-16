@@ -18,6 +18,10 @@
     {
       "name": "Florian Rossiaud",
       "email": "florianrossiaud@gmail.com"
+    },
+    {
+      "name": "Quentin Buathier",
+      "email": "quentin.buathier@epitech.eu"
     }
   ],
   "bin": {
@@ -40,10 +44,8 @@
   ],
   "dependencies": {
     "async": "0.8.x",
-    "request": "2.34.x",
-    "anyfetch-provider": "^0.3.15",
+    "anyfetch-provider": "^1.0.15",
     "googleapis": "0.7.x",
-    "xoauth2": "0.1.x",
     "dotenv": "^0.4.0"
   },
   "devDependencies": {
