@@ -15,16 +15,12 @@ You'll need to define some environment variables
 export GMAIL_API_ID="gmail-app-id"
 export GMAIL_API_SECRET="gmail-app-secret"
 
-# Callback after google consent, most probably http://your-host/init/callback
-export GMAIL_CALLBACK_URL="url-for-callback"
+# Your provider URL, most probably http://your-host
+export PROVIDER_URL="url-for-callback"
 
 # AnyFetch app id and secret
 export ANYFETCH_API_ID="anyfetch-app-id"
 export ANYFETCH_API_SECRET="anyfetch-app-secret"
-
-# Number of mails to retrieve in one run.
-# Will be patched when running tests
-export NUMBER_OF_MAILS_TO_RETRIEVE='*';
 
 # See below for details
 export GMAIL_TEST_REFRESH_TOKEN="see-below"

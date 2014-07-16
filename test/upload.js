@@ -2,81 +2,63 @@
 
 var request = require('supertest');
 var AnyFetchProvider = require('anyfetch-provider');
+var Anyfetch = require('anyfetch');
+var sinon = require('sinon');
 require('should');
 
 var config = require('../config/configuration.js');
 var serverConfig = require('../lib/');
 
-
-
 describe("Workflow", function () {
   before(AnyFetchProvider.debug.cleanTokens);
 
   // Create a fake HTTP server
-  var apiServer = AnyFetchProvider.debug.createTestApiServer();
+  Anyfetch.setApiUrl('http://localhost:1337');
+  var apiServer = Anyfetch.createMockServer();
   apiServer.listen(1337);
 
   before(function(done) {
     AnyFetchProvider.debug.createToken({
       anyfetchToken: 'fake_gc_access_token',
       data: {
-        refreshToken: config.test_refresh_token,
-        mail : config.test_account
+        callbackUrl: config.providerUrl + "/init/callback",
+        tokens: {
+          refresh_token: config.testRefreshToken,
+          access_token: config.testRefreshToken
+        },
+        accountName: config.testAccount
       },
-      cursor: {
-        reverse: false,
-        uid: 1
-      },
+      accountName: config.testAccount
     }, done);
   });
 
   it("should upload data to AnyFetch", function (done) {
-    var nbMailsChecked = 0;
+    var nbAttachments = 0;
+    var nbMails = 0;
+    var originalQueueWorker = serverConfig.workers.addition;
 
-    var originalQueueWorker = serverConfig.queueWorker;
-
-    serverConfig.queueWorker = function(task, anyfetchClient, refreshToken, cb) {
-      originalQueueWorker(task, anyfetchClient, refreshToken, function(err, document) {
+    serverConfig.workers.addition = function(job, cb) {
+      var spyPostDocument = sinon.spy(job.anyfetchClient, "postDocument");
+      var spySendDocumentAndFile = sinon.spy(job.anyfetchClient, "sendDocumentAndFile");
+      originalQueueWorker(job, function(err) {
         if(err) {
-          throw err;
+          return done(err);
         }
 
-        try {
-          document.should.have.property('document_type');
-          document.should.have.property('identifier');
-          document.should.have.property('actions');
-          document.should.have.property('metadata');
-          document.should.have.property('creation_date');
+        spyPostDocument.callCount.should.be.above(0);
+        nbAttachments += spySendDocumentAndFile.callCount;
 
-          if(document.document_type === "email") {
-            document.metadata.should.have.property('from');
-            document.metadata.should.have.property('subject');
-            document.metadata.should.have.property('text');
-            document.metadata.should.have.property('date');
-            document.should.have.property('data');
-            document.should.have.property('document_type', 'email');
-          }
-          else {
-            document.metadata.should.have.property('path');
-            document.should.have.property('related');
-            document.should.have.property('document_type', 'file');
-          }
-        }
-        catch(e) {
-          return done(e);
+        nbMails += 1;
+        if(nbMails === 12) {
+          nbAttachments.should.eql(6);
+          return done(null);
         }
 
-        nbMailsChecked += 1;
-        cb();
-
-        if(nbMailsChecked === 10) {
-          done();
-        }
-
+        cb(null);
       });
     };
 
-    var server = AnyFetchProvider.createServer(serverConfig);
+    var server = AnyFetchProvider.createServer(serverConfig.connectFunctions, serverConfig.updateAccount, serverConfig.workers, serverConfig.config);
 
     request(server)
       .post('/update')

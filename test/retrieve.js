@@ -1,87 +1,64 @@
 'use strict';
 
 var should = require('should');
+var async = require('async');
+var googleapis = require('googleapis');
+var rarity = require('rarity');
 var config = require('../config/configuration.js');
 var retrieve = require('../lib/helpers/retrieve.js');
 
-var toMailsOnly = function(allMails) {
-  return allMails.filter(function(document) {
-    return document._type === "mail";
-  });
-};
-
 describe("Retrieve code", function () {
-  it("should get all mails, in reverse order the first time", function (done) {
-    var allMails = [];
-
-    retrieve(config.test_refresh_token, config.test_account, null, function(err, mails, cursor) {
-      if(err) {
-        throw err;
+  it("should get all mails", function (done) {
+    async.waterfall([
+      function getClient(cb) {
+        googleapis.discover('gmail', 'v1').execute(cb);
+      },
+      function refreshToken(client, cb) {
+        var oauth2Client = new googleapis.OAuth2Client(config.googleId, config.googleSecret, config.providerUrl + "/init/callback");
+        oauth2Client.refreshToken_(config.testRefreshToken, rarity.carryAndSlice([oauth2Client, client], 4, cb));
+      },
+      function callRetrieve(oauth2Client, client, tokens, cb) {
+        var options = {
+          userId: config.testAccount,
+          maxResults: 1000
+        };
+        
+        oauth2Client.credentials = tokens;
+        retrieve(client, oauth2Client, options, {date: new Date(1970), id: 0}, [], cb);
+      },
+      function checkMails(newCursor, mails, cb) {
+        should.exist(mails[0]);
+        mails.length.should.be.above(10);
+        parseInt(mails[0].id, 16).should.be.below(parseInt(mails[1].id, 16));
+        cb(null);
       }
-
-      allMails = allMails.concat(mails);
-
-      if(cursor) {
-        cursor.reverse.should.eql(false);
-
-        should.exist(allMails[0]);
-
-        var allMailsWithoutAttachments = toMailsOnly(allMails);
-        allMailsWithoutAttachments.length.should.be.above(10);
-
-        parseInt(allMailsWithoutAttachments[0].uid).should.be.above(allMailsWithoutAttachments[1].uid);
-
-        done();
-      }
-    });
+    ], done);
   });
 
-  it("should get all mails, in reverse order after a first crash", function (done) {
-    var allMails = [];
-
-    var cursor = {
-      uid: 0,
-      minUid:3,
-      reverse: true,
-    };
-
-    retrieve(config.test_refresh_token, config.test_account, cursor, function(err, mails, cursor) {
-      if(err) {
-        throw err;
+  it("should list mails modified after specified id", function (done) {
+    async.waterfall([
+      function getClient(cb) {
+        googleapis.discover('gmail', 'v1').execute(cb);
+      },
+      function refreshToken(client, cb) {
+        var oauth2Client = new googleapis.OAuth2Client(config.googleId, config.googleSecret, config.providerUrl + "/init/callback");
+        oauth2Client.refreshToken_(config.testRefreshToken, rarity.carryAndSlice([oauth2Client, client], 4, cb));
+      },
+      function callRetrieve(oauth2Client, client, tokens, cb) {
+        var options = {
+          userId: config.testAccount,
+          maxResults: 1000
+        };
+        
+        oauth2Client.credentials = tokens;
+        retrieve(client, oauth2Client, options, {date: new Date("Thu Oct 24 2013 14:19:57 GMT+0200 (CEST)"), id: 0}, [], cb);
+      },
+      function checkMails(newCursor, mails, cb) {
+        should.exist(mails[0]);
+        mails.length.should.be.above(8);
+        parseInt(mails[0].id, 16).should.be.below(parseInt(mails[1].id, 16));
+        cb(null);
       }
-
-      allMails = allMails.concat(mails);
-
-      if(cursor) {
-        cursor.reverse.should.eql(false);
-
-        should.exist(allMails[0]);
-
-        var allMailsWithoutAttachments = toMailsOnly(allMails);
-        allMailsWithoutAttachments.should.have.lengthOf(2);
-
-        parseInt(allMailsWithoutAttachments[0].uid).should.be.above(allMailsWithoutAttachments[1].uid);
-
-        done();
-      }
-    });
-  });
-
-  it("should list mails modified after specified uid", function (done) {
-    var allMails = [];
-
-    retrieve(config.test_refresh_token, config.test_account, {reverse: false, uid: 5}, function(err, mails, cursor) {
-      if(err) {
-        throw err;
-      }
-
-      allMails = allMails.concat(mails);
-
-      if(cursor) {
-        allMails.length.should.be.above(4);
-
-        done();
-      }
-    });
+    ], done);
   });
 });

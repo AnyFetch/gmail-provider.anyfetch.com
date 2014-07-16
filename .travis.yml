@@ -1,13 +1,14 @@
 language: node_js
-services: mongodb
+services:
+- mongodb
+- redis-server
 node_js:
 - '0.10'
 before_script: npm install --dev
 script: npm test
 env:
   global:
-  - GMAIL_CONNECT_URL="http://localhost:8000/init/connect"
-  - GMAIL_CALLBACK_URL="http://localhost:8000/init/callback"
+  - PROVIDER_URL="http://localhost:8000"
   - ANYFETCH_API_ID="fake"
   - ANYFETCH_API_SECRET="fake"
   - secure: A+EqGWgcgTQPi8WBwWvJiJEHAEmCESoGwqo1f9uLjooL2BHHVJEf9AnfRvvK1OSqri72IcN1tYrIfk6mK1NvH80Bowd4gmZY3hlDjdJCR3gMLYQbClGRhgUjZSOrezluT6jfxrykzrD7D6CWMufrl3mi0WkAx7okx+z6NYTIO7Y=
