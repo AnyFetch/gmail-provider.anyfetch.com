@@ -24,7 +24,7 @@ describe("Retrieve code", function () {
         };
         
         oauth2Client.credentials = tokens;
-        retrieve(client, oauth2Client, options, new Date(1970), [], cb);
+        retrieve(client, oauth2Client, options, {date: new Date(1970), id: 0}, [], cb);
       },
       function checkMails(newCursor, mails, cb) {
         should.exist(mails[0]);
@@ -51,7 +51,7 @@ describe("Retrieve code", function () {
         };
         
         oauth2Client.credentials = tokens;
-        retrieve(client, oauth2Client, options, new Date("Thu Oct 24 2013 14:19:57 GMT+0200 (CEST)"), [], cb);
+        retrieve(client, oauth2Client, options, {date: new Date("Thu Oct 24 2013 14:19:57 GMT+0200 (CEST)"), id: 0}, [], cb);
       },
       function checkMails(newCursor, mails, cb) {
         should.exist(mails[0]);
