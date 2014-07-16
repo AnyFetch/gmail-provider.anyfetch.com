@@ -29,13 +29,12 @@
   },
   "scripts": {
     "start": "node ./bin/server",
-    "test": "NODE_ENV=test mocha -R spec -t 15000 -s 2000",
-    "lint": "jshint lib/ test/ config/ bin/"
+    "test": "NODE_ENV=test mocha -R spec -t 15000 -s 2000"
   },
   "main": "./lib/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AnyFetch/gmail.provider.anyfetch.com"
+    "url": "https://github.com/AnyFetch/gmail-provider.anyfetch.com"
   },
   "keywords": [
     "anyfetch",
@@ -44,9 +43,10 @@
   ],
   "dependencies": {
     "async": "0.8.x",
-    "anyfetch-provider": "^1.0.15",
+    "anyfetch-provider": "^1.0.17",
     "googleapis": "0.7.x",
-    "dotenv": "^0.4.0"
+    "dotenv": "^0.4.0",
+    "rarity": "2.1.x"
   },
   "devDependencies": {
     "mocha": "1.18.x",
