@@ -4,8 +4,7 @@
 AnyFetch provider for mails stored in Gmail
 
 # How to install?
-Clone the repo, then `npm install`, `git submodule init`, `git submodule update`.
-
+Clone the repo, then `npm install`.
 Create a `keys.sh` file on the directory root:
 
 You'll need to define some environment variables
