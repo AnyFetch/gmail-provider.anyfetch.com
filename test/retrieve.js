@@ -10,21 +10,20 @@ var retrieve = require('../lib/helpers/retrieve.js');
 describe("Retrieve code", function () {
   it("should get all mails", function (done) {
     async.waterfall([
-      function getClient(cb) {
-        googleapis.discover('gmail', 'v1').execute(cb);
+      function refreshToken(cb) {
+        var oauth2Client = new googleapis.auth.OAuth2(config.googleId, config.googleSecret, config.providerUrl + "/init/callback");
+        oauth2Client.refreshToken_(config.testRefreshToken, rarity.carryAndSlice([oauth2Client], 3, cb));
       },
-      function refreshToken(client, cb) {
-        var oauth2Client = new googleapis.OAuth2Client(config.googleId, config.googleSecret, config.providerUrl + "/init/callback");
-        oauth2Client.refreshToken_(config.testRefreshToken, rarity.carryAndSlice([oauth2Client, client], 4, cb));
-      },
-      function callRetrieve(oauth2Client, client, tokens, cb) {
+      function callRetrieve(oauth2Client, tokens, cb) {
         var options = {
           userId: config.testAccount,
           maxResults: 1000
         };
         
         oauth2Client.credentials = tokens;
-        retrieve(client, oauth2Client, options, {date: new Date(1970), id: 0}, [], cb);
+        options.auth = oauth2Client;
+
+        retrieve(options, {date: new Date(1970), id: 0}, [], cb);
       },
       function checkMails(newCursor, mails, cb) {
         should.exist(mails[0]);
@@ -37,21 +36,20 @@ describe("Retrieve code", function () {
 
   it("should list mails modified after specified id", function (done) {
     async.waterfall([
-      function getClient(cb) {
-        googleapis.discover('gmail', 'v1').execute(cb);
+      function refreshToken(cb) {
+        var oauth2Client = new googleapis.auth.OAuth2(config.googleId, config.googleSecret, config.providerUrl + "/init/callback");
+        oauth2Client.refreshToken_(config.testRefreshToken, rarity.carryAndSlice([oauth2Client], 3, cb));
       },
-      function refreshToken(client, cb) {
-        var oauth2Client = new googleapis.OAuth2Client(config.googleId, config.googleSecret, config.providerUrl + "/init/callback");
-        oauth2Client.refreshToken_(config.testRefreshToken, rarity.carryAndSlice([oauth2Client, client], 4, cb));
-      },
-      function callRetrieve(oauth2Client, client, tokens, cb) {
+      function callRetrieve(oauth2Client, tokens, cb) {
         var options = {
           userId: config.testAccount,
           maxResults: 1000
         };
         
         oauth2Client.credentials = tokens;
-        retrieve(client, oauth2Client, options, {date: new Date("Thu Oct 24 2013 14:19:57 GMT+0200 (CEST)"), id: 0}, [], cb);
+        options.auth = oauth2Client;
+
+        retrieve(options, {date: new Date("Thu Oct 24 2013 14:19:57 GMT+0200 (CEST)"), id: 0}, [], cb);
       },
       function checkMails(newCursor, mails, cb) {
         should.exist(mails[0]);
