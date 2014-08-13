@@ -3,7 +3,6 @@
 var request = require('supertest');
 var AnyFetchProvider = require('anyfetch-provider');
 var Anyfetch = require('anyfetch');
-var sinon = require('sinon');
 require('should');
 
 var config = require('../config/configuration.js');
@@ -33,24 +32,17 @@ describe("Workflow", function () {
   });
 
   it("should upload data to AnyFetch", function (done) {
-    var nbAttachments = 0;
     var nbMails = 0;
     var originalQueueWorker = serverConfig.workers.addition;
 
     serverConfig.workers.addition = function(job, cb) {
-      var spyPostDocument = sinon.spy(job.anyfetchClient, "postDocument");
-      var spySendDocumentAndFile = sinon.spy(job.anyfetchClient, "sendDocumentAndFile");
       originalQueueWorker(job, function(err) {
         if(err) {
           return done(err);
         }
 
-        spyPostDocument.callCount.should.be.above(0);
-        nbAttachments += spySendDocumentAndFile.callCount;
-
         nbMails += 1;
         if(nbMails === 12) {
-          nbAttachments.should.eql(6);
           return done(null);
         }
 
