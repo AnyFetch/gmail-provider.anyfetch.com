@@ -49,5 +49,5 @@ Follow the link in your browser with your Google Account. You'll be redirected t
 
 > Warning: a refresh token is only displayed once. If you get it wrong for some reason, you'll need to clear the permission for your app on https://www.google.com/settings/u/1/security
 
-Support: `support@papiel.fr`.
+Support: `support@anyfetch.com`.
 
