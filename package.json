@@ -39,7 +39,7 @@
   ],
   "dependencies": {
     "async": "0.8.x",
-    "anyfetch-provider": "^1.0.38",
+    "anyfetch-provider": "^1.0.44",
     "googleapis": "^1.0.2",
     "dotenv": "^0.4.0",
     "rarity": "2.1.x"
@@ -48,7 +48,7 @@
     "mocha": "1.18.x",
     "should": "3.3.x",
     "supertest": "0.12.x",
-    "anyfetch": "^1.0.8"
+    "anyfetch": "^2.0.5"
   },
   "licence": "MIT",
   "engines": {
