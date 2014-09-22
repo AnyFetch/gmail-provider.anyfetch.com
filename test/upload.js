@@ -32,7 +32,7 @@ describe("Workflow", function () {
   });
 
   it("should upload data to AnyFetch", function (done) {
-    var nbMails = 0;
+    var nbThreads = 0;
     var originalQueueWorker = serverConfig.workers.addition;
 
     serverConfig.workers.addition = function(job, cb) {
@@ -41,8 +41,8 @@ describe("Workflow", function () {
           return done(err);
         }
 
-        nbMails += 1;
-        if(nbMails === 12) {
+        nbThreads += 1;
+        if(nbThreads === 12) {
           return done(null);
         }
 
