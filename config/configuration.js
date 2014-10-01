@@ -47,5 +47,12 @@ module.exports = {
 
   testRefreshToken: process.env.GMAIL_TEST_REFRESH_TOKEN,
   testAccount: process.env.GMAIL_TEST_ACCOUNT_NAME,
-  imapTimeout: process.env.IMAP_TIMEOUT || 20000
+  imapTimeout: process.env.IMAP_TIMEOUT || 20000,
+
+  opbeat: {
+    organization_id: process.env.OPBEAT_ORGANIZATION_ID,
+    app_id: process.env.OPBEAT_APP_ID,
+    secret_token: process.env.OPBEAT_SECRET_TOKEN,
+    silent: true
+  }
 };
