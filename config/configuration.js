@@ -49,10 +49,8 @@ module.exports = {
   testAccount: process.env.GMAIL_TEST_ACCOUNT_NAME,
   imapTimeout: process.env.IMAP_TIMEOUT || 20000,
 
-  kue: {
-    attempts: 2,
-    backoff: {delay: 20 * 1000, type: 'fixed'}
-  },
+  retry: 2,
+  retryDelay: 20 * 1000,
 
   opbeat: {
     organizationId: process.env.OPBEAT_ORGANIZATION_ID,

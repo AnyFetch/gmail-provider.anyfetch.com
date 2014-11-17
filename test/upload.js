@@ -31,7 +31,7 @@ describe("Workflow", function () {
     }, done);
   });
 
-  it("should upload data to AnyFetch", function (done) {
+  it("should upload data to AnyFetch", function(done) {
     var nbThreads = 0;
     var originalQueueWorker = serverConfig.workers.addition;
 
@@ -42,10 +42,6 @@ describe("Workflow", function () {
         }
 
         nbThreads += 1;
-        if(nbThreads === 12) {
-          return done(null);
-        }
-
         cb(null);
       });
     };
@@ -65,5 +61,10 @@ describe("Workflow", function () {
           throw err;
         }
       });
+
+    server.usersQueue.once('empty', function() {
+      nbThreads.should.eql(12);
+      done();
+    });
   });
 });
