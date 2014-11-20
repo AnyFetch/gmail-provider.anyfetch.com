@@ -33,20 +33,9 @@ describe("Workflow", function () {
 
   it("should upload data to AnyFetch", function(done) {
     var nbThreads = 0;
-    var originalQueueWorker = serverConfig.workers.addition;
 
-    serverConfig.workers.addition = function(job, cb) {
-      originalQueueWorker(job, function(err) {
-        if(err) {
-          return done(err);
-        }
-
-        nbThreads += 1;
-        cb(null);
-      });
-    };
-
-    var server = AnyFetchProvider.createServer(serverConfig.connectFunctions, serverConfig.updateAccount, serverConfig.workers, serverConfig.config);
+    serverConfig.config.retry = 0;
+    var server = AnyFetchProvider.createServer(serverConfig.connectFunctions, __dirname + '/../lib/workers.js', __dirname + '/../lib/update.js', serverConfig.config);
 
     request(server)
       .post('/update')
@@ -61,6 +50,18 @@ describe("Workflow", function () {
           throw err;
         }
       });
+
+    server.usersQueue.on('job.task.completed', function() {
+      nbThreads += 1;
+    });
+
+    server.usersQueue.on('job.task.failed', function(job, err) {
+      done(err);
+    });
+
+    server.usersQueue.on('job.update.failed', function(job, err) {
+      done(err);
+    });
 
     server.usersQueue.once('empty', function() {
       nbThreads.should.eql(12);
