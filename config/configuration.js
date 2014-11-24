@@ -35,6 +35,7 @@ module.exports = {
   mongoUrl: process.env.MONGO_URL || process.env.MONGOLAB_URI,
   redisUrl: process.env.REDIS_URL || process.env.REDISCLOUD_URL,
 
+  usersConcurrency: process.env.GMAIL_USERS_CONCURRENCY || 1,
   concurrency: process.env.GMAIL_CONCURRENCY || 10,
 
   googleId: process.env.GMAIL_API_ID,
