@@ -44,6 +44,7 @@ module.exports = {
   appId: process.env.ANYFETCH_API_ID,
   appSecret: process.env.ANYFETCH_API_SECRET,
 
+  appName: process.env.APP_NAME,
   providerUrl: process.env.PROVIDER_URL,
 
   testRefreshToken: process.env.GMAIL_TEST_REFRESH_TOKEN,
