@@ -7,8 +7,8 @@ var rarity = require('rarity');
 var config = require('../config/configuration.js');
 var retrieve = require('../lib/helpers/retrieve.js');
 
-describe("Retrieve code", function () {
-  it("should get all threads", function (done) {
+describe("Retrieve code", function() {
+  it("should get all threads", function(done) {
     async.waterfall([
       function refreshToken(cb) {
         var oauth2Client = new googleapis.auth.OAuth2(config.googleId, config.googleSecret, config.providerUrl + "/init/callback");
@@ -22,7 +22,7 @@ describe("Retrieve code", function () {
         oauth2Client.credentials = tokens;
         options.auth = oauth2Client;
 
-        retrieve(options, {date: new Date(1970), id: 0}, [], cb);
+        retrieve(options, {date: new Date(1970), id: 0}, [], {}, cb);
       },
       function checkThreads(newCursor, threads, cb) {
         should.exist(threads[0]);
@@ -33,7 +33,7 @@ describe("Retrieve code", function () {
     ], done);
   });
 
-  it("should list threads modified after specified id", function (done) {
+  it("should list threads modified after specified id", function(done) {
     async.waterfall([
       function refreshToken(cb) {
         var oauth2Client = new googleapis.auth.OAuth2(config.googleId, config.googleSecret, config.providerUrl + "/init/callback");
@@ -47,7 +47,7 @@ describe("Retrieve code", function () {
         oauth2Client.credentials = tokens;
         options.auth = oauth2Client;
 
-        retrieve(options, {date: new Date("Thu Oct 24 2013 14:19:57 GMT+0200 (CEST)"), id: 0}, [], cb);
+        retrieve(options, {date: new Date("Thu Oct 24 2013 14:19:57 GMT+0200 (CEST)"), id: 0}, [], {}, cb);
       },
       function checkThreads(newCursor, threads, cb) {
         should.exist(threads[0]);
