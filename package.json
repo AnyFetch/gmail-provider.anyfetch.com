@@ -39,7 +39,7 @@
   ],
   "dependencies": {
     "async": "0.9.x",
-    "anyfetch-provider": "^3.0.10",
+    "anyfetch-provider": "^3.0.11",
     "googleapis": "^1.0.21",
     "dotenv": "^0.4.0",
     "heroku-self-ping": "~1.1.1",
