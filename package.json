@@ -42,6 +42,7 @@
     "anyfetch-provider": "^3.0.10",
     "googleapis": "^1.0.21",
     "dotenv": "^0.4.0",
+    "heroku-self-ping": "~1.1.1",
     "rarity": "2.1.x"
   },
   "devDependencies": {
